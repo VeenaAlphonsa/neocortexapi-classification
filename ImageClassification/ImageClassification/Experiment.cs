@@ -115,6 +115,7 @@ namespace ConsoleApp
         /// <param name="imagePath">Name of Image to be binarized</param>
         /// <param name="height">Height of Binarized Image</param>
         /// <param name="width">Width of Binarized Image</param>
+        /// Parameter modified by Veena to check the result accuracy
         /// <returns></returns>
 
         public int[] ReadImageData(string imagePath, int height, int width)
@@ -124,8 +125,8 @@ namespace ConsoleApp
                 InputImagePath = imagePath,
                 ImageHeight = height,
                 ImageWidth = width,
-                BlueThreshold = 200,
-                RedThreshold = 200,
+                BlueThreshold = 201,
+                RedThreshold = 202,
                 GreenThreshold = 200
             };
             ImageBinarizer bizer = new ImageBinarizer(parameters);
