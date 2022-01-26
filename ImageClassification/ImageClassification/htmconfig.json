@@ -38,9 +38,10 @@
     32
   ],
   "CellsPerColumn": 16,
+  ///To compare the accuracy by Anu Maria 
   "InputDimensions": [
-    100,
-    100
+    180,
+    180
   ],
   "MaxNewSynapseCount": 20,
   "MaxSegmentsPerCell": 225,
