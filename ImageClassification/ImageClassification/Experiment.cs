@@ -127,7 +127,7 @@ namespace ConsoleApp
                 ImageWidth = width,
                 BlueThreshold = 201,
                 RedThreshold = 202,
-                GreenThreshold = 200
+                GreenThreshold = 205
             };
             ImageBinarizer bizer = new ImageBinarizer(parameters);
 
@@ -201,7 +201,7 @@ namespace ConsoleApp
             cortexLayer.HtmModules.Add("sp", sp);
 
             // Learning process will take 1000 iterations (cycles)
-            int maxSPLearningCycles = 1000;
+            int maxSPLearningCycles = 1;
 
             // Save the result SDR into a list of array
             Dictionary<string, int[]> outputValues = new Dictionary<string, int[]>();
