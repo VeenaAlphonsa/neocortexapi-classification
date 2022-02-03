@@ -124,9 +124,9 @@ namespace ConsoleApp
                 InputImagePath = imagePath,
                 ImageHeight = height,
                 ImageWidth = width,
-                BlueThreshold = 210,
-                RedThreshold = 205,
-                GreenThreshold = 201
+                BlueThreshold = 206,
+                RedThreshold = 208,
+                GreenThreshold = 210
             };
             ImageBinarizer bizer = new ImageBinarizer(parameters);
 
