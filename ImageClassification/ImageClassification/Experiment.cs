@@ -57,7 +57,6 @@ namespace ConsoleApp
                                 string fileNameofFirstImage = Path.GetFileNameWithoutExtension(filePathList[i]);
                                 string fileNameOfSecondImage = Path.GetFileNameWithoutExtension(filePathList2[j]);
                                 string temp = $"{classLabel + fileNameofFirstImage}__{classLabel2 + fileNameOfSecondImage}";
-
                                 listCorrelation.Add(temp, MathHelpers.CalcArraySimilarity(sdr1, sdr2));
                         }
                     }
