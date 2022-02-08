@@ -37,11 +37,11 @@
     32,
     32
   ],
-  "CellsPerColumn": 16,
+  "CellsPerColumn": 20,//16
   ///Modified by veena to check the result accuracy
   "InputDimensions": [
-    200,
-    200
+    250,
+    250
   ],
   "MaxNewSynapseCount": 20,
   "MaxSegmentsPerCell": 225,
@@ -52,7 +52,7 @@
   "InputModuleTopology": null,
   "Memory": null,
   "ActivationThreshold": 10,
-  "LearningRadius": 10,
+  "LearningRadius": 20,
   "MinThreshold": 9,
   "InitialPermanence": 0.21,
   "ConnectedPermanence": 0.5,
