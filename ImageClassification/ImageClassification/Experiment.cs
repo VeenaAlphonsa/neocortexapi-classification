@@ -65,7 +65,7 @@ namespace ConsoleApp
             }
 
             var classes = inputsPath.Keys.ToList();
-            //helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
+           //helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
             //helperFunc.printSimilarityMatrix(listCorrelation, "macro", classes);
             helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
         }
@@ -124,8 +124,8 @@ namespace ConsoleApp
                 InputImagePath = imagePath,
                 ImageHeight = height,
                 ImageWidth = width,
-                RedThreshold = 100,
-                GreenThreshold = 100,
+                RedThreshold = 200,
+                GreenThreshold = 200,
                 BlueThreshold = 200
             };
             ImageBinarizer bizer = new ImageBinarizer(parameters);
