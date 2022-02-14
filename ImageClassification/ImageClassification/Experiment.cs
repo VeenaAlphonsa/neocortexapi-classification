@@ -31,11 +31,11 @@ namespace ConsoleApp
             )   = imageBinarization(directories, width, height);
 
             // The key of the dictionary helps to keep track of which class the SDR belongs to
-            Dictionary<string, int[]> sdrs = SPTrain(htmConfig, binaries);
-            //(Dictionary<string, int[]> sdrs2, var cortexLayer2) = SPTrain(htmConfig, binaries, colorThreshold )
+           // Dictionary<string, int[]> sdrs = SPTrain(htmConfig, binaries);
+            (Dictionary<string, int[]> sdrs2, var cortexLayer2) = SPTrain(htmConfig, binaries, colorThreshold);
             HelpersTemp helperFunc = new HelpersTemp();
 
-            Dictionary<string, double> listCorrelation = new();
+            Dictionary<string, double> listInputCorrelation = new();
 
             foreach (KeyValuePair<string, List<string>> entry in inputsPath) // loop of the folder (classes) eg: Apple, banana, etc
             {
@@ -114,30 +114,45 @@ namespace ConsoleApp
 
                     // Image binarization
                     int[] inputVector = ReadImageData(filePath, height, width);
-                    binaries.Add(filePath, inputVector);
-
-                    // Write binarized data to a file
-                    var baseDir = Path.GetDirectoryName(filePath);
+                   // binaries.Add(filePath, inputVector);
+                    string[] savedVector = ConvertToString(inputVector, height, width);
+                // Write binarized data to a file
+                var baseDir = Path.GetDirectoryName(filePath);
                     var fileNameWithoutExt = Path.GetFileNameWithoutExtension(filePath);
                     var ext = "txt";
 
                     var fullFileName = $"{fileNameWithoutExt}.{ext}";
 
-                    System.IO.File.WriteAllLines(Path.Combine(baseDir, fullFileName), inputVector.Select(tb => tb.ToString()));
-                }
+                // System.IO.File.WriteAllLines(Path.Combine(baseDir, fullFileName), inputVector.Select(tb => tb.ToString()));
+                binaries.Add(filePath, inputVector);
+                System.IO.File.WriteAllLines(Path.Combine(baseDir, fullFileName), savedVector);
+
+            }
             }
             return Tuple.Create(binaries, inputsPath);
         }
+        private string[] ConvertToString(int[] inputVector, int height, int width)
+    {
+        string[] vs = new string[width];
+        for (int j = 0; j < height; j++)
+        {
+            for (int i = 0; i < width; i++)
+            {
+                vs[i] += inputVector[j * width + i].ToString() + ',';
+            }
+        }
+        return vs;
+    }
 
-        /// <summary>
-        /// Returns Binarized Image in integer array
-        /// </summary>
-        /// <param name="imagePath">Name of Image to be binarized</param>
-        /// <param name="height">Height of Binarized Image</param>
-        /// <param name="width">Width of Binarized Image</param>
-        /// <returns></returns>
+    /// <summary>
+    /// Returns Binarized Image in integer array
+    /// </summary>
+    /// <param name="imagePath">Name of Image to be binarized</param>
+    /// <param name="height">Height of Binarized Image</param>
+    /// <param name="width">Width of Binarized Image</param>
+    /// <returns></returns>
 
-        public int[] ReadImageData(string imagePath, int height, int width)
+    public int[] ReadImageData(string imagePath, int height, int width)
         {
             var parameters = new BinarizerParams
             {
@@ -221,7 +236,7 @@ namespace ConsoleApp
             cortexLayer.HtmModules.Add("sp", sp);
 
             // Learning process will take 1000 iterations (cycles)
-            int maxSPLearningCycles = 1000;
+            int maxSPLearningCycles = 1;
 
             // Save the result SDR into a list of array
             Dictionary<string, int[]> outputValues = new Dictionary<string, int[]>();
