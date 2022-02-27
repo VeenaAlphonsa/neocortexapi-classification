@@ -37,6 +37,7 @@ namespace ConsoleApp
             HelpersTemp helperFunc = new HelpersTemp();
 
             Dictionary<string, double> listCorrelation = new();
+            Dictionary<string, double> ListInputcorelation = new();
 
             foreach (KeyValuePair<string, List<string>> entry in inputsPath) // loop of the folder (classes) eg: Apple, banana, etc
             {
@@ -60,6 +61,8 @@ namespace ConsoleApp
                             string fileNameOfSecondImage = Path.GetFileNameWithoutExtension(filePathList2[j]);
                             string temp = $"{classLabel + fileNameofFirstImage}__{classLabel2 + fileNameOfSecondImage}";
                             listCorrelation.Add(temp, MathHelpers.CalcArraySimilarity(sdr1, sdr2));
+                            //find the similarity between the pictures from same folder
+                            ListInputcorelation.Add(temp, MathHelpers.CalcArraySimilarity(binaries[filePathList[i]].IndexWhere((el) => el == 1), binaries[filePathList2[j]].IndexWhere((el) => el == 1)));
                         }
                     }
                 }
@@ -68,7 +71,8 @@ namespace ConsoleApp
             var classes = inputsPath.Keys.ToList();
             //helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
             //helperFunc.printSimilarityMatrix(listCorrelation, "macro", classes);
-            //helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
+            helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
+            //Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
             //input file encoding
             // passing the SDR values and given image SDR value after image binarization to the funstion PredictLabel           
             int[] encodedInputImage = ReadImageData("C:/Software Engineering/Project/neocortexapi-classification/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cabbage/CA_6.jpg", width, height);           
