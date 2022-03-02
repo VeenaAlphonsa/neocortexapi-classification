@@ -202,19 +202,19 @@ namespace ConsoleApp
         HomeostaticPlasticityController hpa = new HomeostaticPlasticityController(mem, inputValues.Count * 40,
             (isStable, numPatterns, actColAvg, seenInputs) =>
             {
-                    // Event should only be fired when entering the stable state.
-                    // Ideal SP should never enter unstable state after stable state.
-                    if (isStable == false)
+                // Event should only be fired when entering the stable state.
+                // Ideal SP should never enter unstable state after stable state.
+                if (isStable == false)
                 {
                     Console.WriteLine($"INSTABLE STATE");
-                        // This should usually not happen.
-                        isInStableState = false;
+                    // This should usually not happen.
+                    isInStableState = false;
                 }
                 else
                 {
                     Console.WriteLine($"STABLE STATE");
-                        // Here you can perform any action if required.
-                        isInStableState = true;
+                    // Here you can perform any action if required.
+                    isInStableState = true;
                 }
             });
 
@@ -301,5 +301,4 @@ namespace ConsoleApp
         }
         return label;
     }
-
 }
