@@ -78,7 +78,7 @@ namespace ConsoleApp
             // input image encoding
             // passing the SDR values and given image SDR value after image binarization to the funstion PredictLabel  
 
-            int[] encodedInputImage = ReadImageData("C:\SE\neocortexapi - classification\ImageClassification\ImageClassification\bin\Debug\net6.0\InputFolder\Cabbage\r0_0.jpg", width, height);
+            int[] encodedInputImage = ReadImageData("C:\SE\neocortexapi-classification\ImageClassification\ImageClassification\InputFolder\Cabbage\r0_0.jpg", width, height);
             var temp1 = cortexLayer.Compute(encodedInputImage, true);
 
             // This is a general way to get the SpatialPooler result from the layer.

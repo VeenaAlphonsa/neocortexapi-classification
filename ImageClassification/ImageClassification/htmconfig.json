@@ -39,8 +39,8 @@
   ],
   "CellsPerColumn": 16,
   "InputDimensions": [
-    300,
-    300
+    400,
+    400
   ],
   "MaxNewSynapseCount": 20,
   "MaxSegmentsPerCell": 225,
