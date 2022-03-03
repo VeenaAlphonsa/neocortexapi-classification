@@ -69,9 +69,9 @@ namespace ConsoleApp
             }
 
             var classes = inputsPath.Keys.ToList();
-            //helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
+            helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
             //helperFunc.printSimilarityMatrix(listCorrelation, "macro", classes);
-            helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
+            //helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
             //Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
             //input file encoding
             // passing the SDR values and given image SDR value after image binarization to the funstion PredictLabel           
