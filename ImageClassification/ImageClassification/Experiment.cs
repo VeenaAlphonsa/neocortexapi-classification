@@ -155,7 +155,7 @@ namespace ConsoleApp
     /// <param name="height">Height of Binarized Image</param>
     /// <param name="width">Width of Binarized Image</param>
     /// <returns></returns>
-
+     
     public int[] ReadImageData(string imagePath, int height, int width)
     {
         var parameters = new BinarizerParams
@@ -301,4 +301,5 @@ namespace ConsoleApp
         }
         return label;
     }
+}
 }
