@@ -6,7 +6,7 @@
   "ColumnTopology": null,
   "NumInputs": 1,
   "NumColumns": 0,
-  "PotentialRadius": 30,
+  "PotentialRadius": 40, //previous value was 30
   "PotentialPct": 0.5,
   "StimulusThreshold": 0.0,
   "SynPermBelowStimulusInc": 0.01,
@@ -39,8 +39,8 @@
   ],
   "CellsPerColumn": 16,
   "InputDimensions": [
-    1000,
-    1000
+    250,
+    250
   ],
   "MaxNewSynapseCount": 20,
   "MaxSegmentsPerCell": 225,
