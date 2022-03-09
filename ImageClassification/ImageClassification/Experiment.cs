@@ -72,16 +72,16 @@ namespace ConsoleApp
             //helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
             //helperFunc.printSimilarityMatrix(listCorrelation, "macro", classes);
             helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
-            Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
+            //Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
             //input file encoding
             // passing the SDR values and given image SDR value after image binarization to the funstion PredictLabel           
-            int[] encodedInputImage = ReadImageData("C:/SE/neocortexapi-classification/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cucumber/Cucumber_0.jpg", width, height);
+            int[] encodedInputImage = ReadImageData("C:/SE/neocortexapi-classification/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Carrot/Carrot_3.jpg", width, height);
             var temp1 = cortexLayer.Compute(encodedInputImage, true);
             var activeColumns = cortexLayer.GetResult("sp") as int[];
             var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();
             string predictedLabel = PredictLabel(sdrOfInputImage, sdrs);
             //Console.WriteLine($"Selected image path to predict label is  { Imagepath}");
-           // Console.WriteLine($"The label predicted is  { predictedLabel}");
+            Console.WriteLine($"The label predicted is  { predictedLabel}");
             Console.ReadLine();
         }
 
