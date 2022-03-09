@@ -71,7 +71,7 @@ namespace ConsoleApp
             var classes = inputsPath.Keys.ToList();
             //helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
             //helperFunc.printSimilarityMatrix(listCorrelation, "macro", classes);
-            helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
+            //helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
             //Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
             //input file encoding
             // passing the SDR values and given image SDR value after image binarization to the funstion PredictLabel           
@@ -80,7 +80,7 @@ namespace ConsoleApp
             var activeColumns = cortexLayer.GetResult("sp") as int[];
             var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();
             string predictedLabel = PredictLabel(sdrOfInputImage, sdrs);
-            //Console.WriteLine($"Selected image path to predict label is  { encodedInputImage}");
+            //Console.WriteLine($"Selected image path to predict label is  { inputsPath}");
             Console.WriteLine($"The label predicted is  { predictedLabel}");
             Console.ReadLine();
         }
