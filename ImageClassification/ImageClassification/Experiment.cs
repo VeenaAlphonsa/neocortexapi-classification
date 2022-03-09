@@ -54,7 +54,8 @@ namespace ConsoleApp
                         var classLabel2 = secondEntry.Key;
                         var filePathList2 = secondEntry.Value;
                         var numberOfImages2 = filePathList2.Count;
-                        for (int j = 0; j < numberOfImages2; j++) // loop of the images inside the folder
+                        // loop of the images inside the folder
+                        for (int j = 0; j < numberOfImages2; j++) 
                         {
                             if (!sdrs.TryGetValue(filePathList2[j], out int[] sdr2)) continue;
                             string fileNameofFirstImage = Path.GetFileNameWithoutExtension(filePathList[i]);
@@ -74,9 +75,13 @@ namespace ConsoleApp
             helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
             //Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
             //input file encoding
-            // passing the SDR values and given image SDR value after image binarization to the funstion PredictLabel           
-            int[] encodedInputImage = ReadImageData("C:/Software Engineering/Project/neocortexapi-classification/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cabbage/CA_6.jpg", width, height);           
-            var temp1 = cortexLayer.Compute(encodedInputImage, true);       
+            // passing the SDR values and given image SDR value after image binarization to the function PredictLabel           
+            //int[] encodedInputImage = ReadImageData("C:/Software Engineering/Project/neocortexapi-classification/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cabbage/CA_6.jpg", width, height);           
+            //Changing hard coded data .Get the folder details from command prompt and then predict the folder.
+            Console.WriteLine("Please enter the folder path to predict the label of the image");
+            string encodedInputImage = Console.ReadLine();
+            int[] encodedInputImages = ReadImageData(encodedInputImage, width, height);
+            var temp1 = cortexLayer.Compute(encodedInputImages, true);       
             var activeColumns = cortexLayer.GetResult("sp") as int[];
             var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();                    
             string predictedLabel = PredictLabel(sdrOfInputImage, sdrs);
