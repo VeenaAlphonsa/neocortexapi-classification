@@ -74,8 +74,8 @@ namespace ConsoleApp
             helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
             //Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
             //input file encoding
-            // passing the SDR values and given image SDR value after image binarization to the funstion PredictLabel           
-            int[] encodedInputImage = ReadImageData("G:/Project_SE/neocortexapi/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Carrot/CT_2.jpg", width, height);
+            // passing the SDR values and given image SDR value after image binarization to the function PredictLabel           
+            int[] encodedInputImage = ReadImageData("G:/Project_SE/neocortexapi/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Carrot/CT_4.jpg", width, height);
             var temp1 = cortexLayer.Compute(encodedInputImage, true);
             var activeColumns = cortexLayer.GetResult("sp") as int[];
             var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();

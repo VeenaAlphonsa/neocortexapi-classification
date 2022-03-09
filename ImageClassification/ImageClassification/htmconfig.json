@@ -6,7 +6,7 @@
   "ColumnTopology": null,
   "NumInputs": 1,
   "NumColumns": 0,
-  "PotentialRadius": 30,
+  "PotentialRadius": 40,
   "PotentialPct": 0.5,
   "StimulusThreshold": 0.0,
   "SynPermBelowStimulusInc": 0.01,
@@ -40,8 +40,8 @@
   "CellsPerColumn": 16,
   ///To compare the accuracy by Anu Maria 
   "InputDimensions": [
-    310,
-    310
+    320,
+    320
   ],
   "MaxNewSynapseCount": 20,
   "MaxSegmentsPerCell": 225,
