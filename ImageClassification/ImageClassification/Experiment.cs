@@ -75,7 +75,7 @@ namespace ConsoleApp
             //Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
             //input file encoding
             // passing the SDR values and given image SDR value after image binarization to the function PredictLabel           
-            int[] encodedInputImage = ReadImageData("G:/Project_SE/neocortexapi/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Carrot/CT_4.jpg", width, height);
+            int[] encodedInputImage = ReadImageData("G:/Project_SE/neocortexapi/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cucumber/Cucumber_2.jpg", width, height);
             var temp1 = cortexLayer.Compute(encodedInputImage, true);
             var activeColumns = cortexLayer.GetResult("sp") as int[];
             var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();
