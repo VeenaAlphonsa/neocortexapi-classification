@@ -80,7 +80,7 @@ namespace ConsoleApp
             var activeColumns = cortexLayer.GetResult("sp") as int[];
             var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();
             string predictedLabel = PredictLabel(sdrOfInputImage, sdrs);
-            //Console.WriteLine($"Selected image path to predict label is  { Imagepath}");
+            Console.WriteLine($"Selected image path to predict label is  { Imagepath}");
             Console.WriteLine($"The label predicted is  { predictedLabel}");
             Console.ReadLine();
         }
