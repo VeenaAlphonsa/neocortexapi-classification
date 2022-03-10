@@ -1,4 +1,5 @@
 {
+  ///Modified by veena to check the result accuracy by changing the values of the parameters
   "TemporalMemory": {},
   "SpatialPooler": {},
   "InhibitionRadius": 1,
@@ -6,7 +7,7 @@
   "ColumnTopology": null,
   "NumInputs": 1,
   "NumColumns": 0,
-  "PotentialRadius": 30,
+  "PotentialRadius": 30, // 30
   "PotentialPct": 0.5,
   "StimulusThreshold": 0.0,
   "SynPermBelowStimulusInc": 0.01,
@@ -34,25 +35,25 @@
   "MinOverlapDutyCycles": null,
   "MinActiveDutyCycles": null,
   "ColumnDimensions": [
-    32,
-    32
+    40,//32
+    40 // 32
   ],
-  "CellsPerColumn": 20,//16
+  "CellsPerColumn": 16,
   ///Modified by veena to check the result accuracy
   "InputDimensions": [
     200,
     200
   ],
-  "MaxNewSynapseCount": 20,
-  "MaxSegmentsPerCell": 225,
+  "MaxNewSynapseCount": 10,//20
+  "MaxSegmentsPerCell": 225,//225
   "MaxSynapsesPerSegment": 225,
   "PermanenceIncrement": 0.1,
   "PermanenceDecrement": 0.1,
   "ColumnModuleTopology": null,
   "InputModuleTopology": null,
   "Memory": null,
-  "ActivationThreshold": 10,
-  "LearningRadius": 20,
+  "ActivationThreshold": 15,//10
+  "LearningRadius": 10,
   "MinThreshold": 9,
   "InitialPermanence": 0.21,
   "ConnectedPermanence": 0.5,

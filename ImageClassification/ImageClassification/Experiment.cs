@@ -39,7 +39,7 @@ namespace ConsoleApp
             Dictionary<string, double> listCorrelation = new();
             Dictionary<string, double> ListInputcorelation = new();
 
-            foreach (KeyValuePair<string, List<string>> entry in inputsPath) // loop of the folder (classes) eg: Apple, banana, etc
+            foreach (KeyValuePair<string, List<string>> entry in inputsPath) // loop of the folder (classes) eg: cabbage, carrot, etc
             {
                 var classLabel = entry.Key;
                 var filePathList = entry.Value;
@@ -55,7 +55,7 @@ namespace ConsoleApp
                         var filePathList2 = secondEntry.Value;
                         var numberOfImages2 = filePathList2.Count;
                         // loop of the images inside the folder
-                        for (int j = 0; j < numberOfImages2; j++) 
+                        for (int j = 0; j < numberOfImages2; j++)
                         {
                             if (!sdrs.TryGetValue(filePathList2[j], out int[] sdr2)) continue;
                             string fileNameofFirstImage = Path.GetFileNameWithoutExtension(filePathList[i]);
@@ -73,23 +73,28 @@ namespace ConsoleApp
             //helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
             //helperFunc.printSimilarityMatrix(listCorrelation, "macro", classes);
             helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
-            //Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
-            //input file encoding
-            // passing the SDR values and given image SDR value after image binarization to the function PredictLabel           
-            //int[] encodedInputImage = ReadImageData("C:/Software Engineering/Project/neocortexapi-classification/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cabbage/CA_6.jpg", width, height);           
-            //Changing hard coded data .Get the folder details from command prompt and then predict the folder.
+            ///Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
+            ///input file encoding
+            /// passing the SDR values and given image SDR value after image binarization to the function PredictLabel           
+            ///int[] encodedInputImage = ReadImageData("C:/Software Engineering/Project/neocortexapi-classification/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cabbage/CA_6.jpg", width, height);           
+            ///Changing hard coded image path to get the folder details from command prompt and then predict the folder.
             Console.WriteLine("Please enter the folder path to predict the label of the image");
             string encodedInputImage = Console.ReadLine();
-            int[] encodedInputImages = ReadImageData(encodedInputImage, width, height);
-            var temp1 = cortexLayer.Compute(encodedInputImages, true);       
+            int[] encodedInputImages = ReadImageData(encodedInputImage, height,width);
+            var temp1 = cortexLayer.Compute(encodedInputImages, true);
             var activeColumns = cortexLayer.GetResult("sp") as int[];
-            var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();                    
+            var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();
             string predictedLabel = PredictLabel(sdrOfInputImage, sdrs);
-            //Console.WriteLine($"Selected image path to predict label is  { Imagepath}");
             Console.WriteLine($"The label predicted is  { predictedLabel}");
             Console.ReadLine();
         }
-
+        /// <summary>
+        /// Get the Image path and width and height for Image Binarization
+        /// </summary>
+        /// <param name="directories"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
         private Tuple<Dictionary<string, int[]>, Dictionary<string, List<string>>> imageBinarization(List<string> directories, int width, int height)
         {
             Dictionary<string, List<string>> inputsPath = new Dictionary<string, List<string>>();
@@ -146,8 +151,8 @@ namespace ConsoleApp
                 ImageHeight = height,
                 ImageWidth = width,
                 BlueThreshold = 201,
-                RedThreshold = 202,
-                GreenThreshold = 205
+                RedThreshold = 205,
+                GreenThreshold = 210
             };
             ImageBinarizer bizer = new ImageBinarizer(parameters);
 
@@ -265,7 +270,7 @@ namespace ConsoleApp
         /// <returns></returns>
         public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
         {
-            string label = "Couldnot able to predict the label";           
+            string label = "Could not able to predict the label";
             foreach (var k1 in sdrs)
             {
                 Boolean isArrayEqual = true;

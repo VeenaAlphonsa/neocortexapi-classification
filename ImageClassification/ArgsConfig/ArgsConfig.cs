@@ -5,7 +5,7 @@ namespace AConfig
 {
     public class ArgsConfig
     {
-        private List<string> listInputWithValue = new() {"-cf","-if" };
+        private List<string> listInputWithValue = new() { "-cf", "-if" };
         public HtmConfig htmConfig;
         public string inputFolder;
         public string configFile;
@@ -13,6 +13,10 @@ namespace AConfig
         public bool ifSaveResult;
         public string saveResultPath;
 
+        /// <summary>
+        /// Reading the inputfolder path and htmconfig1.json path
+        /// </summary>
+        /// <param name="args"></param>
         public ArgsConfig(string[] args)
         {
             configFile = "";
@@ -26,37 +30,39 @@ namespace AConfig
                     switch (args[index])
                     {
                         case "-if":
-                            // current input InputFolder
                             index += 1;
                             inputFolder = Path.Combine(currentDir, args[index]);
                             break;
                         case "-cf":
-                            // current config file htmconfig1.json
                             index += 1;
                             configFile = Path.Combine(currentDir, args[index]);
                             break;
                         case "--save-format":
-                            index+=1;
+                            index += 1;
                             saveFormat = args[index];
                             break;
                         case "--save-result":
                             ifSaveResult = true;
                             break;
                         case "--save-result-path":
-                            index+=1;
+                            index += 1;
                             saveResultPath = args[index];
                             break;
                         default:
                             break;
                     }
                 }
-                index+=1;
+                index += 1;
             }
-            // Adding htmconfig1.json to a Dictionary
             htmConfig = SetupHtmConfigParameters(configFile);
         }
 
-        
+        /// <summary>
+        /// Adding htmconfig1.json to a Dictionary and throw exception if the file is empty
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public HtmConfig SetupHtmConfigParameters(string fileName)
         {
             if (string.IsNullOrEmpty(fileName))
@@ -68,7 +74,6 @@ namespace AConfig
                 var cfgJson = sw.ReadToEnd();
                 JsonSerializerSettings settings1 = new JsonSerializerSettings { Formatting = Formatting.Indented };
                 HtmConfig htmConfig = JsonConvert.DeserializeObject<HtmConfig>(cfgJson, settings1);
-                //htmConfig.Random = new Random(42);
                 return htmConfig;
             }
         }
