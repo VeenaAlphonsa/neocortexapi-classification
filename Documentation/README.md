@@ -57,7 +57,7 @@ Result example:
 
 ![Sample output of the experiment after learning](Images/OutputExample.png)  
 The Images used was collected from [Fruit 360](https://www.kaggle.com/moltean/fruits).  
-## How to run the application in Visual Studio
+#### (4) How to run the application in Visual Studio
 Visual Studio can add arguments (args) parameter to run your code.  
 ![](Images/LaunchProfile.png)
 This is done by changing the arguments command line arguments in Debug Properties Launch Profiles to 
@@ -77,5 +77,11 @@ Our task is to change various learning parameters and to find the best fit that 
 We compare the SDRs of the input label with the SDRs of the existing Dataset and predict the label. The prediction code will give the name of the label which is being predicted with the highest similiarity. 
 
 ### RESULTS ACHIEVED
+We have conducted tests to find the best correlation matrix and prediction code has been generated to predict the input labels.
+
+### WORK IN PROGRESS
+We are conducting more tests to find how other HTM parameter influence the learning.
+To define a parameter to represent the overlapping in order to verify the training process.
+
 
 
