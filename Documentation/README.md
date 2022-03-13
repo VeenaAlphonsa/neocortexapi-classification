@@ -1,4 +1,5 @@
-# NeocortexApi-Project **Image Classification**
+# ML21/22-1.2.Analyse Image Classification (Fruits 360 dataset) : CodeChasers
+Team members: Anu Maria Varghese, Tiniya Vinod Puthanpurayil, Veena Alphonsa Jose
 
 This project is the implementaiton of the command line interfaca for the image classification based on the Hierarchical Temporal Memory (HTM) implemented in the [necortexapi](https://github.com/ddobric/neocortexapi) repository.
 
