@@ -215,8 +215,8 @@ namespace ConsoleApp
             // encoder.
             cortexLayer.HtmModules.Add("sp", sp);
 
-            // Learning process will take 100 iterations (cycles)
-            int maxSPLearningCycles = 100;
+            // Learning process will take 1000 iterations (cycles)
+            int maxSPLearningCycles = 1000;
 
             // Save the result SDR into a list of array
             Dictionary<string, int[]> outputValues = new Dictionary<string, int[]>();
