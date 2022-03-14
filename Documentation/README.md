@@ -9,15 +9,17 @@ In the previous work at the university an Image Classification solution has been
 ### 1 Prepare the program's directory:
 First we have prepared images that are required for the training. Images must be copied in the following folder structure along with the application and the config json:  
 
- ![](Images/WorkingDirectory.png)
+<img width="342" alt="WorkingDirectory" src="https://user-images.githubusercontent.com/93146556/158149017-3d3b8973-bc09-4490-ae05-297dd9256cb4.png">
  
 The imagesets are stored inside "InputFolder/".  
 
-![](Images/InputFolder.png)  
+ <img width="476" alt="InputFolder" src="https://user-images.githubusercontent.com/93146556/158149083-9d965452-8a43-40e2-81f9-fbb77ddaaec9.png">
+
 
 Each Imageset is stored inside a folder whose name is the set's label.  
 
-![](Images/SampleData.png)  
+<img width="396" alt="SampleData" src="https://user-images.githubusercontent.com/93146556/158149133-b93f8bc3-cfe4-49af-872c-ffd97f20d964.png">
+
 
  Sample input folder of the project can be found [here](ImageClassification/ImageClassification/InputFolder)  
  ### 2 Start the application by passing required command line arguments
