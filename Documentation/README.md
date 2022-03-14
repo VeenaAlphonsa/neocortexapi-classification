@@ -81,6 +81,8 @@ Our task is to change various learning parameters and to find the best fit that 
 
 #### 2. To Predict the Input Label
 We have compared the SDRs of the input label with the SDRs of the existing dataset and predicted the input label. The prediction code will give the name of the label which is being predicted with the highest similiarity. 
+Below is the prediction code.
+<img width="515" alt="PredictionCode" src="https://user-images.githubusercontent.com/93146556/158154918-353c0391-8ef0-40dc-a4c1-45d9cef583d7.png">
 
 <img width="909" alt="fruits360Prediction" src="https://user-images.githubusercontent.com/93146556/158151137-b50a646d-d35b-4a64-90a9-3c78277bc63f.png">
 
@@ -91,8 +93,9 @@ We have conducted tests to find the best correlation matrix and also prediction 
 
 ## WORK IN PROGRESS
 - We are conducting more tests to find how other HTM parameter influence the learning.
-- To define a parameter to represent the overlapping in order to verify the training process.
-- Also to modify the prediction code to calculate the highest similiarity of the input images.
+- To modify the prediction code to calculate the highest similiarity of the input images.
+
+
 
 
 
