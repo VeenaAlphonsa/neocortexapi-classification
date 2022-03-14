@@ -87,7 +87,13 @@ namespace ConsoleApp
             string predictedLabel = PredictLabel(sdrOfInputImage, sdrs);
             Console.WriteLine($"The label predicted is  { predictedLabel}");
             Console.ReadLine();
-
+            /// <summary>
+            /// To find out the label prediction of the given image
+            /// Created by Veena on 13.03.2022
+            /// </summary>
+            /// <param name="sdrOfInputImage"></param>
+            /// <param name="sdrs"></param>
+            /// <returns></returns>
             string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
             {
                 //Dictionary<string, List<string>> inputsPath = new Dictionary<string, List<string>>();
@@ -304,13 +310,7 @@ namespace ConsoleApp
             }
             return (outputValues, cortexLayer);
         }
-        /// <summary>
-        /// To find out the label prediction of the given image
-        /// Created by Veena on 08.02.2022
-        /// </summary>
-        /// <param name="sdrOfInputImage"></param>
-        /// <param name="sdrs"></param>
-        /// <returns></returns>
+        
         
     }
 }
