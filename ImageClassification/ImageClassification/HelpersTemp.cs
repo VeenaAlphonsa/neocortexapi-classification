@@ -8,6 +8,12 @@ namespace ConsoleApp
 {
     internal class HelpersTemp
     {
+        /// <summary>
+        /// find the average,minimum, maximum values
+        /// </summary>
+        /// <param name="correlationInfo"></param>
+        /// <param name="classes"></param>
+        /// <returns></returns>
         public Dictionary<string, Dictionary<string, double>> GetStatistics(Dictionary<string, double> correlationInfo, List<string> classes)
         {
             Dictionary<string, Dictionary<string, double>> statistics = new Dictionary<string, Dictionary<string, double>>();
@@ -40,26 +46,33 @@ namespace ConsoleApp
             }
             return statistics;
         }
+        /// <summary>
+        /// Get Micro correlation values
+        /// </summary>
+        /// <param name="correlationInfo"></param>
+        /// <param name="classes"></param>
+        /// <returns></returns>
         public Dictionary<string, Dictionary<string, double>> GetMicroStatistics(Dictionary<string, double> correlationInfo, List<string> classes)
         {
-            Dictionary<string, Dictionary<string, double>> statistics = new Dictionary<string, Dictionary<string, double>>(); 
-            Dictionary<string, double> filtered = new Dictionary<string,double>();
+            Dictionary<string, Dictionary<string, double>> statistics = new Dictionary<string, Dictionary<string, double>>();
+            Dictionary<string, double> filtered = new Dictionary<string, double>();
             var temp = correlationInfo.Where(p => SameKeyCheck(p.Key, classes));
             filtered = temp.ToDictionary(p => p.Key, p => p.Value);
-            foreach(string label in classes)
+            foreach (string label in classes)
             {
-                var dic = filtered.Where(p => {
+                var dic = filtered.Where(p =>
+                {
                     var hKey = p.Key.Split("__");
                     if (hKey[0] == hKey[1])
                     {
                         return false;
                     }
-                    if(p.Key.Contains(label)) 
-                    { 
+                    if (p.Key.Contains(label))
+                    {
                         return true;
                     }
                     return false;
-                    });
+                });
                 var values = dic.ToDictionary(p => p.Key, p => p.Value).Values.ToList();
                 var tempStat = new Dictionary<string, double>();
                 tempStat["Max"] = values.Max();
@@ -69,6 +82,12 @@ namespace ConsoleApp
             }
             return statistics;
         }
+        /// <summary>
+        /// get Macrocorrelation values
+        /// </summary>
+        /// <param name="correlationInfo"></param>
+        /// <param name="classes"></param>
+        /// <returns></returns>
         public Dictionary<string, Dictionary<string, double>> GetMacroStatistics(Dictionary<string, double> correlationInfo, List<string> classes)
         {
             Dictionary<string, Dictionary<string, double>> statistics = new Dictionary<string, Dictionary<string, double>>();
@@ -76,7 +95,7 @@ namespace ConsoleApp
             var filtered = temp.ToDictionary(p => p.Key, p => p.Value);
             foreach (string label1 in classes)
             {
-                foreach(string label2 in classes.Where(p => p != label1))
+                foreach (string label2 in classes.Where(p => p != label1))
                 {
                     var dic = filtered.Where(p =>
                     {
@@ -98,14 +117,19 @@ namespace ConsoleApp
             }
             return statistics;
         }
-        // inpuKey here are stored as Class1_imageName__Class2_imageName
+        /// <summary>
+        /// inpuKey here are stored as Class1_imageName__Class2_imageName
+        /// </summary>
+        /// <param name="inputKey"></param>
+        /// <param name="classes"></param>
+        /// <returns></returns>        
         private bool SameKeyCheck(string inputKey, List<string> classes)
         {
             string[] key = inputKey.Split("__");
             string[] keyed = new string[2];
-            for(int i = 0; i < key.Length; i += 1)
+            for (int i = 0; i < key.Length; i += 1)
             {
-                for(int j = 0; j < classes.Count; j += 1)
+                for (int j = 0; j < classes.Count; j += 1)
                 {
                     if (key[i].Contains(classes[j]))
                     {
@@ -113,7 +137,7 @@ namespace ConsoleApp
                     }
                 }
             }
-            if(keyed[0] == keyed[1])
+            if (keyed[0] == keyed[1])
             {
                 return true;
             }
@@ -125,18 +149,18 @@ namespace ConsoleApp
         /// <param name="correlationInfo">correlation matrix dictionary with key as class1__class2</param>
         /// <param name="mode">either "micro";"macro" or "all"</param>
         /// <param name="classes">the classes that are being evaluated</param>
-        public void printSimilarityMatrix(Dictionary<string,double> correlationInfo, string mode, List<string> classes)
+        public void printSimilarityMatrix(Dictionary<string, double> correlationInfo, string mode, List<string> classes)
         {
-            List<ConsoleColor> colorOrder = new List<ConsoleColor>{ ConsoleColor.Green, ConsoleColor.Magenta, ConsoleColor.Yellow, ConsoleColor.Red};
+            List<ConsoleColor> colorOrder = new List<ConsoleColor> { ConsoleColor.Green, ConsoleColor.Magenta, ConsoleColor.Yellow, ConsoleColor.Red };
             if (mode == "micro")
             {
                 var matrix = GetMicroStatistics(correlationInfo, classes);
                 Console.WriteLine("Printing statistics for micro correlation: ");
-                int colorIndex = 0; 
+                int colorIndex = 0;
                 // Printing the table of micro corr
-                var lineLength = classes.Count*25+classes.Count+1;
+                var lineLength = classes.Count * 25 + classes.Count + 1;
                 string dashLine = "";
-                for(int i = 0; i < lineLength; i++)
+                for (int i = 0; i < lineLength; i++)
                 {
                     dashLine += "-";
                 }
@@ -145,7 +169,7 @@ namespace ConsoleApp
                 {
                     Console.ForegroundColor = colorOrder[colorIndex];
                     var classHeader = $"Micro corr {item.Key}:";
-                    Console.Write(String.Format("|{0,-25}",classHeader));
+                    Console.Write(String.Format("|{0,-25}", classHeader));
                     colorIndex = (colorIndex + 1) % colorOrder.Count;
                 }
                 Console.Write("|\n");
@@ -173,19 +197,19 @@ namespace ConsoleApp
                 string tempKey = $"{classes[0]}__{classes[1]}";
                 int firstColLength = 20;
                 int cellLength = 25;
-                int lineLength = cellLength * classes.Count + firstColLength + 1 + 1+ classes.Count;
+                int lineLength = cellLength * classes.Count + firstColLength + 1 + 1 + classes.Count;
                 string dashLine = "";
-                for(int i = 0; i < lineLength; i += 1)
+                for (int i = 0; i < lineLength; i += 1)
                 {
                     dashLine += "-";
                 }
 
                 Console.WriteLine("Printing statistics for macro correlation: ");
                 Console.WriteLine(dashLine);
-                
+
                 // Printing first headings
                 string heading = string.Format("|{0,-20}", "class");
-                foreach(var classLabel in classes)
+                foreach (var classLabel in classes)
                 {
                     heading += string.Format("|{0,-25}", classLabel);
                 }
@@ -196,14 +220,14 @@ namespace ConsoleApp
                 List<string> corrTable = new List<string>();
                 int tableIndex = 0;
 
-                
+
 
                 // Printing the first classes collumn
-                for (int i = 0;i<classes.Count;i+=1)
+                for (int i = 0; i < classes.Count; i += 1)
                 {
                     foreach (var statValue in matrix[tempKey])
                     {
-                        if(tableIndex == (int)((double)matrix[tempKey].Count*((double)i+0.5)))
+                        if (tableIndex == (int)((double)matrix[tempKey].Count * ((double)i + 0.5)))
                         {
                             corrTable.Add(string.Format("|{0,-20}", classes[i]));
                         }
@@ -211,16 +235,17 @@ namespace ConsoleApp
                         {
                             corrTable.Add(string.Format("|{0,-20}", ""));
                         }
-                        tableIndex+=1;
-                    } 
+                        tableIndex += 1;
+                    }
                 }
-                
-                foreach(string classLabel1 in classes)
+
+                foreach (string classLabel1 in classes)
                 {
                     tableIndex = 0;
-                    foreach(string classLabel2 in classes)
+                    foreach (string classLabel2 in classes)
                     {
-                        if (classLabel1!=classLabel2) {
+                        if (classLabel1 != classLabel2)
+                        {
                             foreach (var statValue in matrix[$"{ classLabel1}__{classLabel2 }"])
                             {
 
@@ -254,15 +279,16 @@ namespace ConsoleApp
                 Console.WriteLine(dashLine);
                 foreach (var lines in corrTable)
                 {
-                    if(lineIndex% matrix[tempKey].Count == 0)
+                    if (lineIndex % matrix[tempKey].Count == 0)
                     {
-                        Console.ForegroundColor = colorOrder[(lineIndex / 3)%colorOrder.Count];
+                        Console.ForegroundColor = colorOrder[(lineIndex / 3) % colorOrder.Count];
                     }
                     Console.WriteLine(lines);
-                    if ((lineIndex+1)%matrix[tempKey].Count==0) {
+                    if ((lineIndex + 1) % matrix[tempKey].Count == 0)
+                    {
                         Console.WriteLine(dashLine);
                     }
-                    lineIndex += 1;    
+                    lineIndex += 1;
                 }
                 Console.ResetColor();
             }
@@ -376,7 +402,7 @@ namespace ConsoleApp
                         }
                     }
                     Console.Write("\n");
-                    
+
                     if ((lineIndex + 1) % matrix[tempKey].Count == 0)
                     {
                         Console.WriteLine(dashLine);
