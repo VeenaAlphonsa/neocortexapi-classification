@@ -92,6 +92,7 @@ We have conducted tests to find the best correlation matrix and also prediction 
 ## WORK IN PROGRESS
 - We are conducting more tests to find how other HTM parameter influence the learning.
 - To define a parameter to represent the overlapping in order to verify the training process.
+- Also to modify the prediction code to calculate the highest similiarity of the input images.
 
 
 
