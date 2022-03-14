@@ -1,4 +1,4 @@
-# ML21/22-1.2.Analyse Image Classification (Fruits 360 dataset) : CodeChasers
+# Analyse Image Classification (Fruits 360 dataset) 
 Team members: Anu Maria Varghese, Tiniya Vinod Puthanpurayil, Veena Alphonsa Jose
 
 # **Project Description**
