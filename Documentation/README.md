@@ -21,7 +21,7 @@ Each Imageset is stored inside a folder whose name is the set's label.
 <img width="396" alt="SampleData" src="https://user-images.githubusercontent.com/93146556/158149133-b93f8bc3-cfe4-49af-872c-ffd97f20d964.png">
 
 
- Sample input folder of the project can be found [here](ImageClassification/ImageClassification/InputFolder)  
+ Sample input folder of the project can be found [here](https://github.com/VeenaAlphonsa/neocortexapi-classification/tree/main/ImageClassification/ImageClassification/InputFolder)  
  ### 2 Start the application by passing required command line arguments
  ~~~
  ImageClassifier -if "InputFolder" -cf htmconfig.json
@@ -30,7 +30,7 @@ Each Imageset is stored inside a folder whose name is the set's label.
  -cf   "json htm config file path"  
  
  **HTM Configuration**  
- HTM setting of the project can be inputted to the program by means of a .json file [htmconfig.json](ImageClassification/ImageClassification/htmconfig.json).  
+ HTM setting of the project can be inputted to the program by means of a .json file [htmconfig.json](https://github.com/VeenaAlphonsa/neocortexapi-classification/blob/main/ImageClassification/ImageClassification/htmconfig.json).  
  Multiple experiments can therefore be conducted via changes of parameters in the json file. 
  For a reference on what each parameter does, please refer to []() on [neocortexapi](https://github.com/ddobric/neocortexapi) 
  
@@ -57,7 +57,8 @@ The results of the two correlation are printed in the command prompt when execut
 The algorithm for calculating correlation can be found [here](https://github.com/ddobric/neocortexapi/blob/7d05b61b919a82fd7f8028c63970dfbc7d78dd50/source/NeoCortexApi/Utility/MathHelpers.cs#L93)  
 Result example:
 
-![Sample output of the experiment after learning](Images/OutputExample.png)  
+  <img width="472" alt="OutputExample" src="https://user-images.githubusercontent.com/93146556/158150188-2005139d-5d9e-475b-b13e-8c4a595e1588.png">
+
 The Images used was collected from [Fruit 360](https://www.kaggle.com/moltean/fruits).  
 
 #### (4) How to run the application in Visual Studio
