@@ -57,7 +57,7 @@ The results of the two correlation are printed in the command prompt when execut
 The algorithm for calculating correlation can be found [here](https://github.com/ddobric/neocortexapi/blob/7d05b61b919a82fd7f8028c63970dfbc7d78dd50/source/NeoCortexApi/Utility/MathHelpers.cs#L93)  
 Result example:
 
-  <img width="472" alt="OutputExample" src="https://user-images.githubusercontent.com/93146556/158150188-2005139d-5d9e-475b-b13e-8c4a595e1588.png">
+![Result18-Output](https://user-images.githubusercontent.com/93146556/158152300-ae8b4e8f-029e-4d15-8905-882d9f72ea3a.jpg)
 
 The Images used was collected from [Fruit 360](https://www.kaggle.com/moltean/fruits).  
 
@@ -76,12 +76,17 @@ This folder contains folders of images, where the folder names also act as the l
 #### 1. By changing various HTM Parameter to find the best fit correlation Matrix
 Our task is to change various learning parameters and to find the best fit that shows image classification. Most important learning parameters are: Global/Local Inhibition, Potential Radius, Local Area Density and NumofActiveColumnsPerInArea and we found how these parameters influenced learning. After conducting various tests we have been able to find the parameters at which we get the least overlapping inbetween Micro and Macro and thus the best correlation matrix.
 
+<img width="472" alt="OutputExample" src="https://user-images.githubusercontent.com/93146556/158152443-527ae8e9-a710-454f-a9d3-a2ccd1a70183.png">
 
 #### 2. To Predict the Input Label
 We have compared the SDRs of the input label with the SDRs of the existing dataset and predicted the input label. The prediction code will give the name of the label which is being predicted with the highest similiarity. 
 
+<img width="909" alt="fruits360Prediction" src="https://user-images.githubusercontent.com/93146556/158151137-b50a646d-d35b-4a64-90a9-3c78277bc63f.png">
+
 ## RESULTS ACHIEVED
 We have conducted tests to find the best correlation matrix and also prediction code has been generated to predict the input labels.
+
+<img width="472" alt="OutputExample" src="https://user-images.githubusercontent.com/93146556/158152705-355a8d74-91bb-42e3-b312-95ad47c67dcc.png">
 
 ## WORK IN PROGRESS
 - We are conducting more tests to find how other HTM parameter influence the learning.
