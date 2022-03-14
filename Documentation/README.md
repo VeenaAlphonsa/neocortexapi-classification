@@ -9,7 +9,7 @@ In the previous work at the university an Image Classification solution has been
 ### 1 Prepare the program's directory:
 First we have prepared images that are required for the training. Images must be copied in the following folder structure along with the application and the config json:  
 
- ![](Images/WorkingDirectory.png)
+![](Images/WorkingDirectory.png)
  
 The imagesets are stored inside "InputFolder/".  
 
