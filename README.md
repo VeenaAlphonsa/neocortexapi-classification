@@ -81,7 +81,7 @@ Our task is to change various learning parameters and to find the best fit that 
 #### 2. To Predict the Input Label
 We have compared the SDRs of the input label with the SDRs of the existing dataset and predicted the input label. The prediction code will give the name of the label which is being predicted with the highest similiarity. Below is the prediction code.
 
-~~~
+~~~csharp
 public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
         {
             string label = "Could not able to predict the label";
