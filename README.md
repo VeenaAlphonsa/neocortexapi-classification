@@ -23,7 +23,7 @@ Each Imageset is stored inside a folder whose name is the set's label.
 
  Sample input folder of the project can be found [here](https://github.com/VeenaAlphonsa/neocortexapi-classification/tree/main/ImageClassification/ImageClassification/InputFolder)  
  ### 2 Start the application by passing required command line arguments
- ~~~
+ ~~~csharp
  ImageClassifier -if "InputFolder" -cf htmconfig.json
  ~~~
  -if   "Input Images folder path"  
@@ -65,7 +65,7 @@ The Images used was collected from [Fruit 360](https://www.kaggle.com/moltean/fr
 Visual Studio can add arguments (args) parameter to run your code.  
 ![](Images/LaunchProfile.png)
 This is done by changing the arguments command line arguments in Debug Properties Launch Profiles to 
-~~~
+~~~csharp
 -cf htmconfig.json -if "InputFolder"
 ~~~
 -cf add the option of the configuration file "htmconfig.json"  
@@ -81,7 +81,7 @@ Our task is to change various learning parameters and to find the best fit that 
 #### 2. To Predict the Input Label
 We have compared the SDRs of the input label with the SDRs of the existing dataset and predicted the input label. The prediction code will give the name of the label which is being predicted with the highest similiarity. Below is the prediction code.
 
-~~~
+~~~csharp
 public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
         {
             string label = "Could not able to predict the label";
@@ -106,7 +106,7 @@ public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs
 
 #### 3. To modify the prediction code to calculate the highest similiarity of the input images
 To test the quality of learning we have improved the prediction code to calculate the highest similiarity of the input images. The prediction code provide a set of predicting results like: “Cabbage – 87%, Carrot 7%, Cucumber - 3%”.
-~~~
+~~~csharp
 string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
             {
                 //Dictionary<string, List<string>> inputsPath = new Dictionary<string, List<string>>();
