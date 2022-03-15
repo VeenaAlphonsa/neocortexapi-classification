@@ -106,7 +106,7 @@ public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs
 
 #### 3. To modify the prediction code to calculate the highest similiarity of the input images
 To test the quality of learning we have improved the prediction code to calculate the highest similiarity of the input images. The prediction code provide a set of predicting results like: “Cabbage – 87%, Carrot 7%, Cucumber - 3%”.
-~~~
+~~~csharp
 string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
             {
                 //Dictionary<string, List<string>> inputsPath = new Dictionary<string, List<string>>();
