@@ -14,7 +14,7 @@ namespace AConfig
         public string saveResultPath;
 
         /// <summary>
-        /// Reading the inputfolder path and htmconfig1.json path
+        /// Reading the inputfolder path and htmconfig.json path
         /// </summary>
         /// <param name="args"></param>
         public ArgsConfig(string[] args)
@@ -58,7 +58,7 @@ namespace AConfig
         }
 
         /// <summary>
-        /// Adding htmconfig1.json to a Dictionary and throw exception if the file is empty
+        /// Adding htmconfig.json to a Dictionary and throw exception if the file is empty
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>

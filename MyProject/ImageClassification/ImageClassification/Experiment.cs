@@ -16,8 +16,7 @@ namespace ConsoleApp
         {
             expConfig = config;
             htmConfig = config.htmConfig;
-        }
-
+        }     
         public void run()
         {
             int height = htmConfig.InputDimensions[0];
@@ -70,23 +69,72 @@ namespace ConsoleApp
             }
 
             var classes = inputsPath.Keys.ToList();
-            //helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
-            //helperFunc.printSimilarityMatrix(listCorrelation, "macro", classes);
+            helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
+            helperFunc.printSimilarityMatrix(listCorrelation, "macro", classes);
             helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
             ///Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
             ///input file encoding
             /// passing the SDR values and given image SDR value after image binarization to the function PredictLabel           
             ///int[] encodedInputImage = ReadImageData("C:/Software Engineering/Project/neocortexapi-classification/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cabbage/CA_6.jpg", width, height);           
             ///Changing hard coded image path to get the folder details from command prompt and then predict the folder.
-            //Console.WriteLine("Please enter the folder path to predict the label of the image");
-            //string encodedInputImage = Console.ReadLine();
-            //int[] encodedInputImages = ReadImageData(encodedInputImage, height,width);
-            //var temp1 = cortexLayer.Compute(encodedInputImages, true);
-            //var activeColumns = cortexLayer.GetResult("sp") as int[];
-            //var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();
-            //string predictedLabel = PredictLabel(sdrOfInputImage, sdrs);
-            //Console.WriteLine($"The label predicted is  { predictedLabel}");
-            //Console.ReadLine();
+            Console.WriteLine("Please enter the folder path to predict the label of the image");
+            string encodedInputImage = Console.ReadLine();
+            int[] encodedInputImages = ReadImageData(encodedInputImage, height, width);
+            var temp1 = cortexLayer.Compute(encodedInputImages, true);
+            var activeColumns = cortexLayer.GetResult("sp") as int[];
+            var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();
+            string predictedLabel = PredictLabel(sdrOfInputImage, sdrs);
+            Console.WriteLine($"The label predicted is  { predictedLabel}");
+            Console.ReadLine();
+            /// <summary>
+            /// To find out the label prediction of the given image
+            /// Created by codechasers
+            /// </summary>
+            /// <param name="sdrOfInputImage"></param>
+            /// <param name="sdrs"></param>
+            /// <returns></returns>
+            string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
+            {
+                //Dictionary<string, List<string>> inputsPath = new Dictionary<string, List<string>>();
+                string label = "Could not able to predict the label";
+                double similarityWithEachSDR = 0;
+                double similarityWithPreviousSDR = 0;
+                double temp1 = 0;
+                foreach (KeyValuePair<string, List<string>> secondEntry in inputsPath)
+                {
+                    double sumOfSimilarities = 0; //sum of similarities with images in Same Class(Label)
+
+                    // loop of each folder in input folder
+                    var classLabel2 = secondEntry.Key;
+                    var filePathList2 = secondEntry.Value;
+                    var numberOfImages2 = filePathList2.Count;
+                    for (int j = 0; j < numberOfImages2; j++) // loop of each image in each category of inputs
+                    {
+                        if (!sdrs.TryGetValue(filePathList2[j], out int[] sdr2)) continue;
+
+                        //calculating the similarity between SDR of Input Images with the SDR of the current iterated image (Learning Dataset)
+                        similarityWithEachSDR = MathHelpers.CalcArraySimilarity(sdrOfInputImage, sdr2);
+                        sumOfSimilarities += Math.Round(similarityWithEachSDR, MidpointRounding.AwayFromZero) ;
+                    }
+                    //calculating the Average similarity of the Input Image with Learning Images in each Category (Label)
+                    sumOfSimilarities /= numberOfImages2;
+                    if (sumOfSimilarities > temp1)
+                    {
+                        temp1 = sumOfSimilarities;
+                        label = $"{"The image is predicted as " + secondEntry.Key}";
+                        if (temp1 < 50.0) //This depends and selected based on the HTM parameters given in htmconfig.json file
+                        {
+                            label = "The similarity of Input Image is too low, hence the given image might not belong to the Learning Dataset";
+                        }
+
+                    }
+                    Console.WriteLine("\n> The Input Image is similar to " + secondEntry.Key + " by " + sumOfSimilarities + " %");
+                }
+                //Display the highest similarity  of the Input Image with the training category
+                Console.WriteLine("\n Highest Similarity is: " + temp1 + " % ");
+
+                return label;
+            }
         }
         /// <summary>
         /// Get the Image path and width and height for Image Binarization
@@ -268,23 +316,24 @@ namespace ConsoleApp
         /// <param name="sdrOfInputImage"></param>
         /// <param name="sdrs"></param>
         /// <returns></returns>
-        public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
-        {
-            string label = "Could not able to predict the label";
-            foreach (var k1 in sdrs)
-            {
-                Boolean isArrayEqual = true;
-                int[] newarray = k1.Value;
-                isArrayEqual = sdrOfInputImage.SequenceEqual(newarray);
-                if (isArrayEqual)
-                {
-                    label = k1.Key.ToString();
-                    string[] labelarray = label.Split('\\');
-                    label = labelarray[11];
-                    return label;
-                }
-            }
-            return label;
-        }
+        //public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
+        //{
+        //    string label = "Could not able to predict the label";
+        //    foreach (var k1 in sdrs)
+        //    {
+        //        Boolean isArrayEqual = true;
+        //        int[] newarray = k1.Value;
+        //        isArrayEqual = sdrOfInputImage.SequenceEqual(newarray);
+        //        if (isArrayEqual)
+        //        {
+        //            label = k1.Key.ToString();
+        //            string[] labelarray = label.Split('\\');
+        //            label = labelarray[11];
+        //            return label;
+        //        }
+        //    }
+        //    return label;
+        //}
+
     }
 }

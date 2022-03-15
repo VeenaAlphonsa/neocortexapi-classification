@@ -1,5 +1,5 @@
 {
-  ///Modified by veena to check the result accuracy by changing the values of the parameters
+  ///Modified bycodechasers to check the result accuracy by changing the values of the parameters
   "TemporalMemory": {},
   "SpatialPooler": {},
   "InhibitionRadius": 1,
@@ -39,7 +39,7 @@
     32 // 32
   ],
   "CellsPerColumn": 16,
-  ///Modified by veena to check the result accuracy
+  ///Modified by codechasers to check the result accuracy
   "InputDimensions": [
     250,//
     250
