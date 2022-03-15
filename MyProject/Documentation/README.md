@@ -151,7 +151,8 @@ string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
             }
 ~~~
 
-<img width="925" alt="RoundPredictionImage" src="https://user-images.githubusercontent.com/93146556/158352934-1c61126d-3f37-43e9-96cf-10c137c898cc.png">
+
+<img width="920" alt="similiarity" src="https://user-images.githubusercontent.com/93146556/158353757-3bf932f8-c7ae-4e44-8d40-8c63b38780c8.png">
 
 
 ## RESULTS ACHIEVED
