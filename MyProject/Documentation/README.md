@@ -23,7 +23,7 @@ Each Imageset is stored inside a folder whose name is the set's label.
 
  Sample input folder of the project can be found [here](https://github.com/VeenaAlphonsa/neocortexapi-classification/tree/main/ImageClassification/ImageClassification/InputFolder)  
  ### 2 Start the application by passing required command line arguments
- ~~~
+ ~~~csharp
  ImageClassifier -if "InputFolder" -cf htmconfig.json
  ~~~
  -if   "Input Images folder path"  
@@ -65,7 +65,7 @@ The Images used was collected from [Fruit 360](https://www.kaggle.com/moltean/fr
 Visual Studio can add arguments (args) parameter to run your code.  
 ![](Images/LaunchProfile.png)
 This is done by changing the arguments command line arguments in Debug Properties Launch Profiles to 
-~~~
+~~~csharp
 -cf htmconfig.json -if "InputFolder"
 ~~~
 -cf add the option of the configuration file "htmconfig.json"  
