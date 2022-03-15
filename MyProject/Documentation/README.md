@@ -1,4 +1,4 @@
-# ML21/22-1.2.Analyse Image Classification (Fruits 360 dataset) : CodeChasers
+# Analyse Image Classification (Fruits 360 dataset) 
 Team members: Anu Maria Varghese, Tiniya Vinod Puthanpurayil, Veena Alphonsa Jose
 
 # **Project Description**
@@ -85,14 +85,18 @@ We have compared the SDRs of the input label with the SDRs of the existing datas
 
 <img width="909" alt="fruits360Prediction" src="https://user-images.githubusercontent.com/93146556/158151137-b50a646d-d35b-4a64-90a9-3c78277bc63f.png">
 
+#### 3. To modify the prediction code to calculate the highest similiarity of the input images
+To test the quality of learning we have improved the prediction code to calculate the highest similiarity of the input images. The prediction code provide a set of predicting results like: “Cabbage – 87%, Carrot 7%, Cucumber - 3%”.
+
 ## RESULTS ACHIEVED
 We have conducted tests to find the best correlation matrix and also prediction code has been generated to predict the input labels.
 
-<img width="472" alt="OutputExample" src="https://user-images.githubusercontent.com/93146556/158152705-355a8d74-91bb-42e3-b312-95ad47c67dcc.png">
+<img width="925" alt="RoundPredictionImage" src="https://user-images.githubusercontent.com/93146556/158351849-70edfade-465f-41c3-8166-0e8645e4819d.png">
+
 
 ## WORK IN PROGRESS
 - We are conducting more tests to find how other HTM parameter influence the learning.
-- To modify the prediction code to calculate the highest similiarity of the input images.
+- To define a parameter to represent the overlapping in order to verify the training process.
 
 
 
