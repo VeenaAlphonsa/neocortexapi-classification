@@ -24,14 +24,14 @@ namespace ConsoleApp
             int width = htmConfig.InputDimensions[1];
             Dictionary<string, int[]> sdrs;
 
-            // By default it only returns subdirectories one level deep. 
+            /// By default it only returns subdirectories one level deep. 
             var directories = Directory.GetDirectories(expConfig.inputFolder).ToList();
 
-            (Dictionary<string, int[]> binaries, // List of Binarized images
-                Dictionary<string, List<string>> inputsPath // Path of the list of images found in the given folder
+            (Dictionary<string, int[]> binaries, /// List of Binarized images
+                Dictionary<string, List<string>> inputsPath /// Path of the list of images found in the given folder
             ) = imageBinarization(directories, width, height);
 
-            // The key of the dictionary helps to keep track of which class the SDR belongs to
+            ///The key of the dictionary helps to keep track of which class the SDR belongs to
             (sdrs, var cortexLayer) = SPTrain(htmConfig, binaries);
 
             HelpersTemp helperFunc = new HelpersTemp();
@@ -39,29 +39,29 @@ namespace ConsoleApp
             Dictionary<string, double> listCorrelation = new();
             Dictionary<string, double> ListInputcorelation = new();
 
-            foreach (KeyValuePair<string, List<string>> entry in inputsPath) // loop of the folder (classes) eg: Apple, banana, etc
+            foreach (KeyValuePair<string, List<string>> entry in inputsPath) /// loop of the folder (classes) eg: Carrot, Cabbage, etc
             {
                 var classLabel = entry.Key;
                 var filePathList = entry.Value;
                 var numberOfImages = filePathList.Count;
 
-                for (int i = 0; i < numberOfImages; i++) // loop of the images inside the folder
+                for (int i = 0; i < numberOfImages; i++) /// loop of the images inside the folder
                 {
                     if (!sdrs.TryGetValue(filePathList[i], out int[] sdr1)) continue;
 
                     foreach (KeyValuePair<string, List<string>> secondEntry in inputsPath)
-                    { // loop of the folder (again)
+                    { /// loop of the folder (again)
                         var classLabel2 = secondEntry.Key;
                         var filePathList2 = secondEntry.Value;
                         var numberOfImages2 = filePathList2.Count;
-                        for (int j = 0; j < numberOfImages2; j++) // loop of the images inside the folder
+                        for (int j = 0; j < numberOfImages2; j++) /// loop of the images inside the folder
                         {
                             if (!sdrs.TryGetValue(filePathList2[j], out int[] sdr2)) continue;
                             string fileNameofFirstImage = Path.GetFileNameWithoutExtension(filePathList[i]);
                             string fileNameOfSecondImage = Path.GetFileNameWithoutExtension(filePathList2[j]);
                             string temp = $"{classLabel + fileNameofFirstImage}__{classLabel2 + fileNameOfSecondImage}";
                             listCorrelation.Add(temp, MathHelpers.CalcArraySimilarity(sdr1, sdr2));
-                            //find the similarity between the pictures from same folder
+                            ///find the similarity between the pictures from same folder
                             ListInputcorelation.Add(temp, MathHelpers.CalcArraySimilarity(binaries[filePathList[i]].IndexWhere((el) => el == 1), binaries[filePathList2[j]].IndexWhere((el) => el == 1)));
                         }
                     }
@@ -73,8 +73,8 @@ namespace ConsoleApp
             helperFunc.printSimilarityMatrix(listCorrelation, "macro", classes);
             helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
             //Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
-            //input file encoding
-            // passing the SDR values and given image SDR value after image binarization to the function PredictLabel           
+            ///input file encoding
+            /// passing the SDR values and given image SDR value after image binarization to the function PredictLabel           
             int[] encodedInputImage = ReadImageData("G:/Project_SE/neocortexapi/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cucumber/Cucumber_3.jpg", width, height);
             var temp1 = cortexLayer.Compute(encodedInputImage, true);
             var activeColumns = cortexLayer.GetResult("sp") as int[];
@@ -107,11 +107,11 @@ namespace ConsoleApp
 
                     inputsPath[folderName].Add(filePath);
 
-                    // Image binarization
+                    /// Image binarization
                     int[] inputVector = ReadImageData(filePath, height, width);
                     binaries.Add(filePath, inputVector);
 
-                    // Write binarized data to a file
+                    ///Write binarized data to a file
                     var baseDir = Path.GetDirectoryName(filePath);
                     var fileNameWithoutExt = Path.GetFileNameWithoutExtension(filePath);
                     var ext = "txt";
@@ -130,7 +130,7 @@ namespace ConsoleApp
         /// <param name="imagePath">Name of Image to be binarized</param>
         /// <param name="height">Height of Binarized Image</param>
         /// <param name="width">Width of Binarized Image</param>
-        /// Parameter modified by Anu to check the result accuracy
+        /// Parameter modified to check the result accuracy
         /// <returns></returns>
 
         public int[] ReadImageData(string imagePath, int height, int width)
@@ -166,59 +166,59 @@ namespace ConsoleApp
         /// <param name="inputValues"></param> Binary input vector (pattern) list
         private static (Dictionary<string, int[]>, CortexLayer<object, object> cortexLayer) SPTrain(HtmConfig cfg, Dictionary<string, int[]> inputValues)
         {
-            // Creates the htm memory.
+            /// Creates the htm memory.
             var mem = new Connections(cfg);
             bool isInStableState = false;
-            // HPC extends the default Spatial Pooler algorithm.
-            // The purpose of HPC is to set the SP in the new-born stage at the begining of the learning process.
-            // In this stage the boosting is very active, but the SP behaves instable. After this stage is over
-            // (defined by the second argument) the HPC is controlling the learning process of the SP.
-            // Once the SDR generated for every input gets stable, the HPC will fire event that notifies your code
-            // that SP is stable now.
+            /// HPC extends the default Spatial Pooler algorithm.
+            /// The purpose of HPC is to set the SP in the new-born stage at the begining of the learning process.
+            /// In this stage the boosting is very active, but the SP behaves instable. After this stage is over
+            /// (defined by the second argument) the HPC is controlling the learning process of the SP.
+            /// Once the SDR generated for every input gets stable, the HPC will fire event that notifies your code
+            /// that SP is stable now.
             HomeostaticPlasticityController hpa = new HomeostaticPlasticityController(mem, inputValues.Count * 40,
                 (isStable, numPatterns, actColAvg, seenInputs) =>
                 {
-                    // Event should only be fired when entering the stable state.
-                    // Ideal SP should never enter unstable state after stable state.
+                    /// Event should only be fired when entering the stable state.
+                    /// Ideal SP should never enter unstable state after stable state.
                     if (isStable == false)
                     {
                         Console.WriteLine($"INSTABLE STATE");
-                        // This should usually not happen.
+                        /// This should usually not happen.
                         isInStableState = false;
                     }
                     else
                     {
                         Console.WriteLine($"STABLE STATE");
-                        // Here you can perform any action if required.
+                        /// Here you can perform any action if required.
                         isInStableState = true;
                     }
                 });
 
-            // It creates the instance of Spatial Pooler Multithreaded version.
+            /// It creates the instance of Spatial Pooler Multithreaded version.
             SpatialPooler sp = new SpatialPoolerMT(hpa);
 
-            // Initializes the Spatial Pooler 
+            /// Initializes the Spatial Pooler 
             sp.Init(mem, new DistributedMemory() { ColumnDictionary = new InMemoryDistributedDictionary<int, NeoCortexApi.Entities.Column>(1) });
 
             // mem.TraceProximalDendritePotential(true);
 
-            // It creates the instance of the neo-cortex layer.
-            // Algorithm will be performed inside of that layer.
+            /// It creates the instance of the neo-cortex layer.
+            /// Algorithm will be performed inside of that layer.
             CortexLayer<object, object> cortexLayer = new CortexLayer<object, object>("L1");
 
-            // Add encoder as the very first module. This model is connected to the sensory input cells
-            // that receive the input. Encoder will receive the input and forward the encoded signal
-            // to the next module.
-            //cortexLayer.HtmModules.Add("encoder", encoder);
+            /// Add encoder as the very first module. This model is connected to the sensory input cells
+            /// that receive the input. Encoder will receive the input and forward the encoded signal
+            /// to the next module.
+            ///cortexLayer.HtmModules.Add("encoder", encoder);
 
-            // The next module in the layer is Spatial Pooler. This module will receive the output of the
-            // encoder.
+            /// The next module in the layer is Spatial Pooler. This module will receive the output of the
+            /// encoder.
             cortexLayer.HtmModules.Add("sp", sp);
 
-            // Learning process will take 1000 iterations (cycles)
+            /// Learning process will take 1000 iterations (cycles)
             int maxSPLearningCycles = 1000;
 
-            // Save the result SDR into a list of array
+            /// Save the result SDR into a list of array
             Dictionary<string, int[]> outputValues = new Dictionary<string, int[]>();
 
             for (int cycle = 0; cycle < maxSPLearningCycles; cycle++)
@@ -226,20 +226,20 @@ namespace ConsoleApp
                 Console.WriteLine($"Cycle  ** {cycle} ** Stability: {isInStableState}");
 
                 int iteration = 0;
-                outputValues.Clear(); // Remove all elements in output SDR list
+                outputValues.Clear(); /// Remove all elements in output SDR list
 
-                // This trains the layer on input pattern.
+                /// This trains the layer on input pattern.
 
                 foreach (var input in inputValues)
                 {
                     iteration++;
 
-                    // Learn the input pattern.
-                    // Output lyrOut is the output of the last module in the layer.
+                    /// Learn the input pattern.
+                    /// Output lyrOut is the output of the last module in the layer.
 
                     var lyrOut = cortexLayer.Compute(input.Value, true);
 
-                    // This is a general way to get the SpatialPooler result from the layer.
+                    /// This is a general way to get the SpatialPooler result from the layer.
                     var activeColumns = cortexLayer.GetResult("sp") as int[];
 
                     var actCols = activeColumns.OrderBy(c => c).ToArray();
@@ -253,7 +253,7 @@ namespace ConsoleApp
         }
         /// <summary>
         /// To find out the label prediction of the given image
-        /// Created by Anu on 01.03.2022
+        /// Created by CodeChasers
         /// </summary>
         /// <param name="sdrOfInputImage"></param>
         /// <param name="sdrs"></param>
