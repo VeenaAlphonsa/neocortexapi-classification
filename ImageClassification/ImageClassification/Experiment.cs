@@ -17,7 +17,6 @@ namespace ConsoleApp
             expConfig = config;
             htmConfig = config.htmConfig;
         }
-
         public void run()
         {
             int height = htmConfig.InputDimensions[0];
@@ -27,11 +26,11 @@ namespace ConsoleApp
             /// By default it only returns subdirectories one level deep. 
             var directories = Directory.GetDirectories(expConfig.inputFolder).ToList();
 
-            (Dictionary<string, int[]> binaries, /// List of Binarized images
-                Dictionary<string, List<string>> inputsPath /// Path of the list of images found in the given folder
+            (Dictionary<string, int[]> binaries, // List of Binarized images
+                Dictionary<string, List<string>> inputsPath // Path of the list of images found in the given folder
             ) = imageBinarization(directories, width, height);
 
-            ///The key of the dictionary helps to keep track of which class the SDR belongs to
+            /// The key of the dictionary helps to keep track of which class the SDR belongs to
             (sdrs, var cortexLayer) = SPTrain(htmConfig, binaries);
 
             HelpersTemp helperFunc = new HelpersTemp();
@@ -39,13 +38,13 @@ namespace ConsoleApp
             Dictionary<string, double> listCorrelation = new();
             Dictionary<string, double> ListInputcorelation = new();
 
-            foreach (KeyValuePair<string, List<string>> entry in inputsPath) /// loop of the folder (classes) eg: Carrot, Cabbage, etc
+            foreach (KeyValuePair<string, List<string>> entry in inputsPath) // loop of the folder (classes) eg: cabbage, carrot, etc
             {
                 var classLabel = entry.Key;
                 var filePathList = entry.Value;
                 var numberOfImages = filePathList.Count;
 
-                for (int i = 0; i < numberOfImages; i++) /// loop of the images inside the folder
+                for (int i = 0; i < numberOfImages; i++) // loop of the images inside the folder
                 {
                     if (!sdrs.TryGetValue(filePathList[i], out int[] sdr1)) continue;
 
@@ -54,7 +53,8 @@ namespace ConsoleApp
                         var classLabel2 = secondEntry.Key;
                         var filePathList2 = secondEntry.Value;
                         var numberOfImages2 = filePathList2.Count;
-                        for (int j = 0; j < numberOfImages2; j++) /// loop of the images inside the folder
+                        /// loop of the images inside the folder
+                        for (int j = 0; j < numberOfImages2; j++)
                         {
                             if (!sdrs.TryGetValue(filePathList2[j], out int[] sdr2)) continue;
                             string fileNameofFirstImage = Path.GetFileNameWithoutExtension(filePathList[i]);
@@ -72,19 +72,77 @@ namespace ConsoleApp
             helperFunc.printSimilarityMatrix(listCorrelation, "micro", classes);
             helperFunc.printSimilarityMatrix(listCorrelation, "macro", classes);
             helperFunc.printSimilarityMatrix(listCorrelation, "both", classes);
-            //Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
+            ///Console.WriteLine(ListInputcorelation["Cabbagepic1__CabbagePic2"]);
             ///input file encoding
             /// passing the SDR values and given image SDR value after image binarization to the function PredictLabel           
-            int[] encodedInputImage = ReadImageData("G:/Project_SE/neocortexapi/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cucumber/Cucumber_3.jpg", width, height);
-            var temp1 = cortexLayer.Compute(encodedInputImage, true);
+            ///int[] encodedInputImage = ReadImageData("C:/Software Engineering/Project/neocortexapi-classification/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cabbage/CA_6.jpg", width, height);           
+            ///Changing hard coded image path to get the folder details from command prompt and then predict the folder.
+            Console.WriteLine("Please enter the folder path to predict the label of the image");
+            string encodedInputImage = Console.ReadLine();
+            int[] encodedInputImages = ReadImageData(encodedInputImage, height, width);
+            var temp1 = cortexLayer.Compute(encodedInputImages, true);
             var activeColumns = cortexLayer.GetResult("sp") as int[];
             var sdrOfInputImage = activeColumns.OrderBy(c => c).ToArray();
             string predictedLabel = PredictLabel(sdrOfInputImage, sdrs);
-            //Console.WriteLine($"Selected image path to predict label is  { Imagepath}");
             Console.WriteLine($"The label predicted is  { predictedLabel}");
             Console.ReadLine();
-        }
+            /// <summary>
+            /// To find out the label prediction of the given image
+            /// Created by codechasers
+            /// </summary>
+            /// <param name="sdrOfInputImage"></param>
+            /// <param name="sdrs"></param>
+            /// <returns></returns>
+            string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
+            {
+                //Dictionary<string, List<string>> inputsPath = new Dictionary<string, List<string>>();
+                string label = "Could not able to predict the label";
+                double similarityWithEachSDR = 0;
+                double similarityWithPreviousSDR = 0;
+                double temp1 = 0;
+                foreach (KeyValuePair<string, List<string>> secondEntry in inputsPath)
+                {
+                    double sumOfSimilarities = 0; //sum of similarities with images in Same Class(Label)
 
+                    /// loop of each folder in input folder
+                    var classLabel2 = secondEntry.Key;
+                    var filePathList2 = secondEntry.Value;
+                    var numberOfImages2 = filePathList2.Count;
+                    for (int j = 0; j < numberOfImages2; j++) // loop of each image in each category of inputs
+                    {
+                        if (!sdrs.TryGetValue(filePathList2[j], out int[] sdr2)) continue;
+
+                        ///calculating the similarity between SDR of Input Images with the SDR of the current iterated image (Learning Dataset)
+                        similarityWithEachSDR = MathHelpers.CalcArraySimilarity(sdrOfInputImage, sdr2);
+                        sumOfSimilarities += Math.Round(similarityWithEachSDR, MidpointRounding.AwayFromZero);
+                    }
+                    ///calculating the Average similarity of the Input Image with Learning Images in each Category (Label)
+                    sumOfSimilarities /= numberOfImages2;
+                    if (sumOfSimilarities > temp1)
+                    {
+                        temp1 = sumOfSimilarities;
+                        label = $"{"The image is predicted as " + secondEntry.Key}";
+                        if (temp1 < 50.0) //This depends and selected based on the HTM parameters given in htmconfig.json file
+                        {
+                            label = "The similarity of Input Image is too low, hence the given image might not belong to the Learning Dataset";
+                        }
+
+                    }
+                    Console.WriteLine("\n> The Input Image is similar to " + secondEntry.Key + " by " + sumOfSimilarities + " %");
+                }
+                ///Display the highest similarity  of the Input Image with the training category
+                Console.WriteLine("\n Highest Similarity is: " + temp1 + " % ");
+
+                return label;
+            }
+        }
+        /// <summary>
+        /// Get the Image path and width and height for Image Binarization
+        /// </summary>
+        /// <param name="directories"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
         private Tuple<Dictionary<string, int[]>, Dictionary<string, List<string>>> imageBinarization(List<string> directories, int width, int height)
         {
             Dictionary<string, List<string>> inputsPath = new Dictionary<string, List<string>>();
@@ -111,7 +169,7 @@ namespace ConsoleApp
                     int[] inputVector = ReadImageData(filePath, height, width);
                     binaries.Add(filePath, inputVector);
 
-                    ///Write binarized data to a file
+                    /// Write binarized data to a file
                     var baseDir = Path.GetDirectoryName(filePath);
                     var fileNameWithoutExt = Path.GetFileNameWithoutExtension(filePath);
                     var ext = "txt";
@@ -130,7 +188,7 @@ namespace ConsoleApp
         /// <param name="imagePath">Name of Image to be binarized</param>
         /// <param name="height">Height of Binarized Image</param>
         /// <param name="width">Width of Binarized Image</param>
-        /// Parameter modified to check the result accuracy
+        /// Parameter modified by Veena to check the result accuracy
         /// <returns></returns>
 
         public int[] ReadImageData(string imagePath, int height, int width)
@@ -140,9 +198,9 @@ namespace ConsoleApp
                 InputImagePath = imagePath,
                 ImageHeight = height,
                 ImageWidth = width,
-                BlueThreshold = 209,
-                RedThreshold = 211,
-                GreenThreshold = 215
+                BlueThreshold = 206,
+                RedThreshold = 208,
+                GreenThreshold = 210
             };
             ImageBinarizer bizer = new ImageBinarizer(parameters);
 
@@ -200,7 +258,7 @@ namespace ConsoleApp
             /// Initializes the Spatial Pooler 
             sp.Init(mem, new DistributedMemory() { ColumnDictionary = new InMemoryDistributedDictionary<int, NeoCortexApi.Entities.Column>(1) });
 
-            // mem.TraceProximalDendritePotential(true);
+            /// mem.TraceProximalDendritePotential(true);
 
             /// It creates the instance of the neo-cortex layer.
             /// Algorithm will be performed inside of that layer.
@@ -253,28 +311,29 @@ namespace ConsoleApp
         }
         /// <summary>
         /// To find out the label prediction of the given image
-        /// Created by CodeChasers
+        /// Created  on 08.02.2022
         /// </summary>
         /// <param name="sdrOfInputImage"></param>
         /// <param name="sdrs"></param>
         /// <returns></returns>
-        public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
-        {
-            string label = "Couldnot able to predict the label";
-            foreach (var k1 in sdrs)
-            {
-                Boolean isArrayEqual = true;
-                int[] newarray = k1.Value;
-                isArrayEqual = sdrOfInputImage.SequenceEqual(newarray);
-                if (isArrayEqual)
-                {
-                    label = k1.Key.ToString();
-                    string[] labelarray = label.Split('\\');
-                    label = labelarray[10];
-                    return label;
-                }
-            }
-            return label;
-        }
+        //public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
+        //{
+        //    string label = "Could not able to predict the label";
+        //    foreach (var k1 in sdrs)
+        //    {
+        //        Boolean isArrayEqual = true;
+        //        int[] newarray = k1.Value;
+        //        isArrayEqual = sdrOfInputImage.SequenceEqual(newarray);
+        //        if (isArrayEqual)
+        //        {
+        //            label = k1.Key.ToString();
+        //            string[] labelarray = label.Split('\\');
+        //            label = labelarray[11];
+        //            return label;
+        //        }
+        //    }
+        //    return label;
+        //}
+
     }
 }
