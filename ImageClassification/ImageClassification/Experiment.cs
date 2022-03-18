@@ -61,6 +61,7 @@ namespace ConsoleApp
                             string fileNameOfSecondImage = Path.GetFileNameWithoutExtension(filePathList2[j]);
                             string temp = $"{classLabel + fileNameofFirstImage}__{classLabel2 + fileNameOfSecondImage}";
                             listCorrelation.Add(temp, MathHelpers.CalcArraySimilarity(sdr1, sdr2));
+
                             //find the similarity between the pictures from same folder
                             ListInputcorelation.Add(temp, MathHelpers.CalcArraySimilarity(binaries[filePathList[i]].IndexWhere((el) => el == 1), binaries[filePathList2[j]].IndexWhere((el) => el == 1)));
                         }
