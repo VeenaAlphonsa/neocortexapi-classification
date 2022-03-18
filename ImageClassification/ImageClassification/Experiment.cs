@@ -253,29 +253,31 @@ namespace ConsoleApp
             return (outputValues, cortexLayer);
         }
         /// <summary>
+        /// Commenting the input prediction. 
         /// To find out the label prediction of the given image
         /// Created by Tiniya on 08.02.2022
         /// </summary>
         /// <param name="sdrOfInputImage"></param>
         /// <param name="sdrs"></param>
         /// <returns></returns>
-        public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
-        {
-            string label = "Couldnot able to predict the label";
-            foreach (var k1 in sdrs)
-            {
-                Boolean isArrayEqual = true;
-                int[] newarray = k1.Value;
-                isArrayEqual = sdrOfInputImage.SequenceEqual(newarray);
-                if (isArrayEqual)
-                {
-                    label = k1.Key.ToString();
-                    string[] labelarray = label.Split('\\');
-                    label = labelarray[10];
-                    return label;
-                }
-            }
-            return label;
-        }
+        ///
+        /// public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
+        ///{
+        /// string label = "Couldnot able to predict the label";
+        ///    foreach (var k1 in sdrs)
+        ///    {
+        ///     Boolean isArrayEqual = true;
+        ///     int[] newarray = k1.Value;
+        ///     isArrayEqual = sdrOfInputImage.SequenceEqual(newarray);
+        ///     if (isArrayEqual)
+        ///     {
+        ///       label = k1.Key.ToString();
+        ///       string[] labelarray = label.Split('\\');
+        ///       label = labelarray[10];
+        ///       return label;
+        ///      }
+        ///     }
+        /// return label;
+        /// }
     }
 }
