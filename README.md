@@ -1,4 +1,4 @@
-# ML21/22-1.2.Analyse Image Classification (Fruits 360 dataset) : CodeChasers
+# Analyse Image Classification (Fruits 360 dataset) 
 Team members: Anu Maria Varghese, Tiniya Vinod Puthanpurayil, Veena Alphonsa Jose
 
 # **Project Description**
@@ -57,7 +57,6 @@ The results of the two correlation are printed in the command prompt when execut
 The algorithm for calculating correlation can be found [here](https://github.com/ddobric/neocortexapi/blob/7d05b61b919a82fd7f8028c63970dfbc7d78dd50/source/NeoCortexApi/Utility/MathHelpers.cs#L93)  
 Result example:
 
-
 ![Result18-Output Example](https://user-images.githubusercontent.com/93146556/158153392-b655405b-9491-4273-b479-d82e8d776ca0.jpg)
 
 The Images used was collected from [Fruit 360](https://www.kaggle.com/moltean/fruits).  
@@ -80,22 +79,88 @@ Our task is to change various learning parameters and to find the best fit that 
 <img width="470" alt="Fruits360matrix without prediction" src="https://user-images.githubusercontent.com/93146556/158153042-79ae821a-5cea-4cf2-814d-06449932aeab.png">
 
 #### 2. To Predict the Input Label
-We have compared the SDRs of the input label with the SDRs of the existing dataset and predicted the input label. The prediction code will give the name of the label which is being predicted with the highest similiarity. 
-Below is the prediction code.
-<img width="515" alt="PredictionCode" src="https://user-images.githubusercontent.com/93146556/158154918-353c0391-8ef0-40dc-a4c1-45d9cef583d7.png">
+We have compared the SDRs of the input label with the SDRs of the existing dataset and predicted the input label. The prediction code will give the name of the label which is being predicted with the highest similiarity. Below is the prediction code.
+
+~~~csharp
+public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
+        {
+            string label = "Could not able to predict the label";
+            foreach (var k1 in sdrs)
+            {
+                Boolean isArrayEqual = true;
+                int[] newarray = k1.Value;
+                isArrayEqual = sdrOfInputImage.SequenceEqual(newarray);
+                if (isArrayEqual)
+                {
+                    label = k1.Key.ToString();
+                    string[] labelarray = label.Split('\\');
+                    label = labelarray[11];
+                    return label;
+                }
+            }
+            return label;
+        }
+~~~
 
 <img width="909" alt="fruits360Prediction" src="https://user-images.githubusercontent.com/93146556/158151137-b50a646d-d35b-4a64-90a9-3c78277bc63f.png">
+
+#### 3. To modify the prediction code to calculate the highest similiarity of the input images
+To test the quality of learning we have improved the prediction code to calculate the highest similiarity of the input images. The prediction code provide a set of predicting results like: “Cabbage – 87%, Carrot 7%, Cucumber - 3%”.
+~~~csharp
+string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
+            {
+                //Dictionary<string, List<string>> inputsPath = new Dictionary<string, List<string>>();
+                string label = "Could not able to predict the label";
+                double similarityWithEachSDR = 0;
+                double similarityWithPreviousSDR = 0;
+                double temp1 = 0;
+                foreach (KeyValuePair<string, List<string>> secondEntry in inputsPath)
+                {
+                    double sumOfSimilarities = 0; //sum of similarities with images in Same Class(Label)
+
+                    // loop of each folder in input folder
+                    var classLabel2 = secondEntry.Key;
+                    var filePathList2 = secondEntry.Value;
+                    var numberOfImages2 = filePathList2.Count;
+                    for (int j = 0; j < numberOfImages2; j++) // loop of each image in each category of inputs
+                    {
+                        if (!sdrs.TryGetValue(filePathList2[j], out int[] sdr2)) continue;
+
+                        //calculating the similarity between SDR of Input Images with the SDR of the current iterated image (Learning Dataset)
+                        similarityWithEachSDR = MathHelpers.CalcArraySimilarity(sdrOfInputImage, sdr2);
+                        sumOfSimilarities += Math.Round(similarityWithEachSDR, MidpointRounding.AwayFromZero) ;
+                    }
+                    //calculating the Average similarity of the Input Image with Learning Images in each Category (Label)
+                    sumOfSimilarities /= numberOfImages2;
+                    if (sumOfSimilarities > temp1)
+                    {
+                        temp1 = sumOfSimilarities;
+                        label = $"{"The image is predicted as " + secondEntry.Key}";
+                        if (temp1 < 50.0) //This depends and selected based on the HTM parameters given in htmconfig.json file
+                        {
+                            label = "The similarity of Input Image is too low, hence the given image might not belong to the Learning Dataset";
+                        }
+
+                    }
+                    Console.WriteLine("\n> The Input Image is similar to " + secondEntry.Key + " by " + sumOfSimilarities + " %");
+                }
+                //Display the highest similarity  of the Input Image with the training category
+                Console.WriteLine("\n Highest Similarity is: " + temp1 + " % ");
+
+                return label;
+            }
+~~~
+
+
+<img width="920" alt="similiarity" src="https://user-images.githubusercontent.com/93146556/158353757-3bf932f8-c7ae-4e44-8d40-8c63b38780c8.png">
+
 
 ## RESULTS ACHIEVED
 We have conducted tests to find the best correlation matrix and also prediction code has been generated to predict the input labels.
 
-<img width="472" alt="OutputExample" src="https://user-images.githubusercontent.com/93146556/158152705-355a8d74-91bb-42e3-b312-95ad47c67dcc.png">
+<img width="925" alt="RoundPredictionImage" src="https://user-images.githubusercontent.com/93146556/158351849-70edfade-465f-41c3-8166-0e8645e4819d.png">
+
 
 ## WORK IN PROGRESS
 - We are conducting more tests to find how other HTM parameter influence the learning.
-- To modify the prediction code to calculate the highest similiarity of the input images.
-
-
-
-
-
+- To define a parameter to represent the overlapping in order to verify the training process.
