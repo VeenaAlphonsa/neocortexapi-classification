@@ -157,10 +157,13 @@ string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
 
 ## RESULTS ACHIEVED
 We have conducted tests to find the best correlation matrix and also prediction code has been generated to predict the input labels.
-
+### Case 1: By changing various HTM Parameter to find the best fit correlation Matrix
 <img width="470" alt="Fruits360matrix without prediction" src="https://user-images.githubusercontent.com/93146556/158153042-79ae821a-5cea-4cf2-814d-06449932aeab.png">
 
+### Case 2: To Predict the Input Label
 <img width="909" alt="fruits360Prediction" src="https://user-images.githubusercontent.com/93146556/158151137-b50a646d-d35b-4a64-90a9-3c78277bc63f.png">
+
+### Case 3: To modify the prediction code to calculate the highest similiarity of the input images
 
 <img width="920" alt="similiarity" src="https://user-images.githubusercontent.com/93146556/158353757-3bf932f8-c7ae-4e44-8d40-8c63b38780c8.png">
 
