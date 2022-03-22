@@ -3,7 +3,7 @@ Team members: Anu Maria Varghese, Tiniya Vinod Puthanpurayil, Veena Alphonsa Jos
 
 # **Project Description**
 ## **AIM**
-In the previous work at the university an Image Classification solution has been implemented. Our task is to implement a program that uses the existing solution as a library and start a training of learning images. The image dataset we have used in this project is Fruits 360 dataset images. Our task is to change various learning parameters and to find the best fit that shows image classification. Most important learning parameters are: Global/Local Inhibition, Potential Radius, Local Area Density and NumofActiveColumnsPerInArea. We have to demonstrate how these parameters influence the learning. Our code must provide the learning code and prediction code. After learning user should use your code and test the quality of learning. For example, the user after learning enter the image “table”. The prediction code provide a set of predicting results like: “Table – 87%, chair 7%, light - 3%”.
+In the previous work at the university an Image Classification solution has been implemented. Our task is to implement a program that uses the existing solution as a library and start a training of learning images. The image dataset we have used in this project is Fruits 360 dataset images. Our task is to change various learning parameters and to find the best fit that shows image classification. Most important learning parameters are: Global/Local Inhibition, Potential Radius, Local Area Density and NumofActiveColumnsPerInArea. We have to demonstrate how these parameters influence the learning. Our code must provide the learning code and prediction code. After learning user should use our code and test the quality of learning. For example, the user after learning enter the image “table”. The prediction code provide a set of predicting results like: “Table – 87%, chair 7%, light - 3%”.
 
 ## METHODS
 ### 1 Prepare the program's directory:
@@ -76,7 +76,7 @@ This folder contains folders of images, where the folder names also act as the l
 #### 1. By changing various HTM Parameter to find the best fit correlation Matrix
 Our task is to change various learning parameters and to find the best fit that shows image classification. Most important learning parameters are: Global/Local Inhibition, Potential Radius, Local Area Density and NumofActiveColumnsPerInArea and we found how these parameters influenced learning. After conducting various tests we have been able to find the parameters at which we get the least overlapping inbetween Micro and Macro and thus the best correlation matrix.
 
-<img width="470" alt="Fruits360matrix without prediction" src="https://user-images.githubusercontent.com/93146556/158153042-79ae821a-5cea-4cf2-814d-06449932aeab.png">
+
 
 #### 2. To Predict the Input Label
 We have compared the SDRs of the input label with the SDRs of the existing dataset and predicted the input label. The prediction code will give the name of the label which is being predicted with the highest similiarity. Below is the prediction code.
@@ -102,7 +102,7 @@ public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs
         }
 ~~~
 
-<img width="909" alt="fruits360Prediction" src="https://user-images.githubusercontent.com/93146556/158151137-b50a646d-d35b-4a64-90a9-3c78277bc63f.png">
+
 
 #### 3. To modify the prediction code to calculate the highest similiarity of the input images
 To test the quality of learning we have improved the prediction code to calculate the highest similiarity of the input images. The prediction code provide a set of predicting results like: “Cabbage – 87%, Carrot 7%, Cucumber - 3%”.
@@ -152,13 +152,25 @@ string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
 ~~~
 
 
-<img width="920" alt="similiarity" src="https://user-images.githubusercontent.com/93146556/158353757-3bf932f8-c7ae-4e44-8d40-8c63b38780c8.png">
+
 
 
 ## RESULTS ACHIEVED
 We have conducted tests to find the best correlation matrix and also prediction code has been generated to predict the input labels.
+#### Case 1: By changing various HTM Parameter to find the best fit correlation Matrix
+<img width="470" alt="Fruits360matrix without prediction" src="https://user-images.githubusercontent.com/93146556/158153042-79ae821a-5cea-4cf2-814d-06449932aeab.png">
 
-<img width="925" alt="RoundPredictionImage" src="https://user-images.githubusercontent.com/93146556/158351849-70edfade-465f-41c3-8166-0e8645e4819d.png">
+#### Case 2: By Predicting the Input Label
+<img width="909" alt="fruits360Prediction" src="https://user-images.githubusercontent.com/93146556/158151137-b50a646d-d35b-4a64-90a9-3c78277bc63f.png">
+
+#### Case 3: By modifying the prediction code to calculate the highest similiarity of the input images
+
+<img width="920" alt="similiarity" src="https://user-images.githubusercontent.com/93146556/158353757-3bf932f8-c7ae-4e44-8d40-8c63b38780c8.png">
+
+#### Final Output
+
+![final output](https://user-images.githubusercontent.com/93146556/159457975-ee6bdca9-be02-45e0-b313-83c81435a5ba.jpg)
+
 
 
 ## WORK IN PROGRESS
