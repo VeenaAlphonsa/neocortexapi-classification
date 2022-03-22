@@ -258,7 +258,7 @@ namespace ConsoleApp
             // Initializes the Spatial Pooler 
             sp.Init(mem, new DistributedMemory() { ColumnDictionary = new InMemoryDistributedDictionary<int, NeoCortexApi.Entities.Column>(1) });
 
-            // mem.TraceProximalDendritePotential(true);
+             mem.TraceProximalDendritePotential(true);
 
             // It creates the instance of the neo-cortex layer.
             // Algorithm will be performed inside of that layer.
@@ -267,7 +267,7 @@ namespace ConsoleApp
             // Add encoder as the very first module. This model is connected to the sensory input cells
             // that receive the input. Encoder will receive the input and forward the encoded signal
             // to the next module.
-            //cortexLayer.HtmModules.Add("encoder", encoder);
+            ///cortexLayer.HtmModules.Add("encoder", encoder);
 
             // The next module in the layer is Spatial Pooler. This module will receive the output of the
             // encoder.
