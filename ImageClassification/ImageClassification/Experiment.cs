@@ -188,7 +188,7 @@ namespace ConsoleApp
         /// <param name="imagePath">Name of Image to be binarized</param>
         /// <param name="height">Height of Binarized Image</param>
         /// <param name="width">Width of Binarized Image</param>
-        /// Parameter modified by Veena to check the result accuracy
+        /// Parameter modified  to check the result accuracy
         /// <returns></returns>
 
         public int[] ReadImageData(string imagePath, int height, int width)
@@ -274,7 +274,7 @@ namespace ConsoleApp
             cortexLayer.HtmModules.Add("sp", sp);
 
             /// Learning process will take 1000 iterations (cycles)
-            int maxSPLearningCycles = 1000;
+            int maxSPLearningCycles = 10;
 
             /// Save the result SDR into a list of array
             Dictionary<string, int[]> outputValues = new Dictionary<string, int[]>();
