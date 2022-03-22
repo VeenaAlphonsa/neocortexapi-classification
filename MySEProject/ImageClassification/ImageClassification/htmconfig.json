@@ -1,0 +1,63 @@
+{
+  ///Modified bycodechasers to check the result accuracy by changing the values of the parameters
+  "TemporalMemory": {},
+  "SpatialPooler": {},
+  "InhibitionRadius": 1,
+  "InputTopology": null,
+  "ColumnTopology": null,
+  "NumInputs": 1,
+  "NumColumns": 0,
+  "PotentialRadius": 27, // 30
+  "PotentialPct": 0.5,
+  "StimulusThreshold": 0.0,
+  "SynPermBelowStimulusInc": 0.01,
+  "SynPermInactiveDec": 0.01,
+  "SynPermActiveInc": 0.1,
+  "SynPermConnected": 0.1,
+  "WrapAround": true,
+  "GlobalInhibition": false,
+  "LocalAreaDensity": 0.1,
+  "SynPermTrimThreshold": 0.05,
+  "SynPermMax": 1.0,
+  "SynPermMin": 0.0,
+  "InitialSynapseConnsPct": 0.5,
+  "InputMatrix": null,
+  "NumActiveColumnsPerInhArea": -1.0,
+  "MinPctOverlapDutyCycles": 0.1,
+  "MinPctActiveDutyCycles": 0.1,
+  "PredictedSegmentDecrement": 0.1,
+  "DutyCyclePeriod": 10,
+  "MaxBoost": 10.0,
+  "IsBumpUpWeakColumnsDisabled": false,
+  "UpdatePeriod": 50,
+  "OverlapDutyCycles": null,
+  "ActiveDutyCycles": null,
+  "MinOverlapDutyCycles": null,
+  "MinActiveDutyCycles": null,
+  "ColumnDimensions": [
+    32,//32
+    32 // 32
+  ],
+  "CellsPerColumn": 16,
+  ///Modified by codechasers to check the result accuracy
+  "InputDimensions": [
+    250,//
+    250
+  ],
+  "MaxNewSynapseCount": 20,//20
+  "MaxSegmentsPerCell": 225,//225
+  "MaxSynapsesPerSegment": 225,
+  "PermanenceIncrement": 0.1,
+  "PermanenceDecrement": 0.1,
+  "ColumnModuleTopology": null,
+  "InputModuleTopology": null,
+  "Memory": null,
+  "ActivationThreshold": 10,//10
+  "LearningRadius": 20,//10
+  "MinThreshold": 9,
+  "InitialPermanence": 0.21,
+  "ConnectedPermanence": 0.5,
+  "RandomGenSeed": 42,
+  "Name": null,
+  "Random": {}
+}
