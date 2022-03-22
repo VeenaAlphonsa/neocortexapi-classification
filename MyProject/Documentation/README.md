@@ -160,15 +160,17 @@ We have conducted tests to find the best correlation matrix and also prediction 
 #### Case 1: By changing various HTM Parameter to find the best fit correlation Matrix
 <img width="470" alt="Fruits360matrix without prediction" src="https://user-images.githubusercontent.com/93146556/158153042-79ae821a-5cea-4cf2-814d-06449932aeab.png">
 
-#### Case 2: To Predict the Input Label
+#### Case 2: By Predicting the Input Label
 <img width="909" alt="fruits360Prediction" src="https://user-images.githubusercontent.com/93146556/158151137-b50a646d-d35b-4a64-90a9-3c78277bc63f.png">
 
-#### Case 3: To modify the prediction code to calculate the highest similiarity of the input images
+#### Case 3: By modifying the prediction code to calculate the highest similiarity of the input images
 
 <img width="920" alt="similiarity" src="https://user-images.githubusercontent.com/93146556/158353757-3bf932f8-c7ae-4e44-8d40-8c63b38780c8.png">
 
 #### Final Output
-<img width="925" alt="RoundPredictionImage" src="https://user-images.githubusercontent.com/93146556/158351849-70edfade-465f-41c3-8166-0e8645e4819d.png">
+
+![final output](https://user-images.githubusercontent.com/93146556/159457975-ee6bdca9-be02-45e0-b313-83c81435a5ba.jpg)
+
 
 
 ## WORK IN PROGRESS
