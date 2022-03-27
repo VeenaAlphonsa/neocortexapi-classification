@@ -123,7 +123,7 @@ string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
             }
 ~~~
 
-
+Code description: Select one image path from input folder. The image is binarized into an integer array with "ReadImageData". Using "Compute" method of API, the SDR of the image is calculated and is then compared with the  SDR values of other images which is available in the input folder using the "PredictLabel" function. We can get the similarity of the images using "CalcArraySimilarity".
 
 
 ## RESULTS ACHIEVED
@@ -139,11 +139,6 @@ We have conducted tests to find the best correlation matrix and also prediction 
 
 ![final output](https://user-images.githubusercontent.com/93146556/159457975-ee6bdca9-be02-45e0-b313-83c81435a5ba.jpg)
 
-
-
-## WORK IN PROGRESS
-- We are conducting more tests to find how other HTM parameter influence the learning.
-- To define a parameter to represent the overlapping in order to verify the training process.
 
 
 
