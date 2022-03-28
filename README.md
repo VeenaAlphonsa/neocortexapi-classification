@@ -6,7 +6,7 @@ Team members: Anu Maria Varghese, Tiniya Vinod Puthanpurayil, Veena Alphonsa Jos
 In the previous work at the university an Image Classification solution has been implemented. Our task is to implement a program that uses the existing solution as a library and start a training of learning images. The image dataset we have used in this project is Fruits 360 dataset images. Our task is to change various learning parameters and to find the best fit that shows image classification. Most important learning parameters are: Global/Local Inhibition, Potential Radius, Local Area Density and NumofActiveColumnsPerInArea. We have to demonstrate how these parameters influence the learning. Our code must provide the learning code and prediction code. After learning user should use our code and test the quality of learning. For example, the user after learning enter the image “table”. The prediction code provide a set of predicting results like: “Table – 87%, chair 7%, light - 3%”.
 
 ## METHODS
-### 1 Prepare the program's directory:
+#### 1 Prepare the program's directory:
 First we have prepared images that are required for the training. Images must be copied in the following folder structure along with the application and the config json:  
 
 <img width="342" alt="WorkingDirectory" src="https://user-images.githubusercontent.com/93146556/158149017-3d3b8973-bc09-4490-ae05-297dd9256cb4.png">
