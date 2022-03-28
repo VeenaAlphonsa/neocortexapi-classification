@@ -76,35 +76,7 @@ This folder contains folders of images, where the folder names also act as the l
 #### 1. By changing various HTM Parameter to find the best fit correlation Matrix
 Our task is to change various learning parameters and to find the best fit that shows image classification. Most important learning parameters are: Global/Local Inhibition, Potential Radius, Local Area Density and NumofActiveColumnsPerInArea and we found how these parameters influenced learning. After conducting various tests we have been able to find the parameters at which we get the least overlapping inbetween Micro and Macro and thus the best correlation matrix.
 
-
-
-#### 2. To Predict the Input Label
-We have compared the SDRs of the input label with the SDRs of the existing dataset and predicted the input label. The prediction code will give the name of the label which is being predicted with the highest similiarity. Below is the prediction code.
-
-~~~csharp
-public string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
-        {
-            string label = "Could not able to predict the label";
-            foreach (var k1 in sdrs)
-            {
-                Boolean isArrayEqual = true;
-                int[] newarray = k1.Value;
-                isArrayEqual = sdrOfInputImage.SequenceEqual(newarray);
-                if (isArrayEqual)
-                {
-                    label = k1.Key.ToString();
-                    string[] labelarray = label.Split('\\');
-                    label = labelarray[11];
-                    return label;
-                }
-            }
-            return label;
-        }
-~~~
-
-
-
-#### 3. To modify the prediction code to calculate the highest similiarity of the input images
+#### 2. To modify the prediction code to calculate the highest similiarity of the input images
 To test the quality of learning we have improved the prediction code to calculate the highest similiarity of the input images. The prediction code provide a set of predicting results like: “Cabbage – 87%, Carrot 7%, Cucumber - 3%”.
 ~~~csharp
 string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
@@ -151,8 +123,7 @@ string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
             }
 ~~~
 
-
-
+Code description: Select one image path from input folder. The image is binarized into an integer array with "ReadImageData". Using "Compute" method of API, the SDR of the image is calculated and is then compared with the  SDR values of other images which is available in the input folder using the "PredictLabel" function. We can get the similarity of the images using "CalcArraySimilarity".
 
 
 ## RESULTS ACHIEVED
@@ -160,10 +131,7 @@ We have conducted tests to find the best correlation matrix and also prediction 
 #### Case 1: By changing various HTM Parameter to find the best fit correlation Matrix
 <img width="470" alt="Fruits360matrix without prediction" src="https://user-images.githubusercontent.com/93146556/158153042-79ae821a-5cea-4cf2-814d-06449932aeab.png">
 
-#### Case 2: By Predicting the Input Label
-<img width="909" alt="fruits360Prediction" src="https://user-images.githubusercontent.com/93146556/158151137-b50a646d-d35b-4a64-90a9-3c78277bc63f.png">
-
-#### Case 3: By modifying the prediction code to calculate the highest similiarity of the input images
+#### Case 2: By modifying the prediction code to calculate the highest similiarity of the input images
 
 <img width="920" alt="similiarity" src="https://user-images.githubusercontent.com/93146556/158353757-3bf932f8-c7ae-4e44-8d40-8c63b38780c8.png">
 
@@ -171,11 +139,6 @@ We have conducted tests to find the best correlation matrix and also prediction 
 
 ![final output](https://user-images.githubusercontent.com/93146556/159457975-ee6bdca9-be02-45e0-b313-83c81435a5ba.jpg)
 
-
-
-## WORK IN PROGRESS
-- We are conducting more tests to find how other HTM parameter influence the learning.
-- To define a parameter to represent the overlapping in order to verify the training process.
 
 
 
