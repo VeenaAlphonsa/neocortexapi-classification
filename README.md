@@ -1,4 +1,4 @@
-# Analyse Image Classification (Fruits 360 dataset) 
+# Analyse Image Classification of Fruits 360 dataset
 Team members: Anu Maria Varghese, Tiniya Vinod Puthanpurayil, Veena Alphonsa Jose
 
 # **Project Description**
@@ -57,7 +57,8 @@ The results of the two correlation are printed in the command prompt when execut
 The algorithm for calculating correlation can be found [here](https://github.com/ddobric/neocortexapi/blob/7d05b61b919a82fd7f8028c63970dfbc7d78dd50/source/NeoCortexApi/Utility/MathHelpers.cs#L93)  
 Result example:
 
-![Result18-Output Example](https://user-images.githubusercontent.com/93146556/158153392-b655405b-9491-4273-b479-d82e8d776ca0.jpg)
+<img width="591" alt="final output check 3" src="https://user-images.githubusercontent.com/93146556/160924174-777b5d54-a8d8-428e-8e60-f40d2ddd30a8.PNG">
+
 
 The Images used was collected from [Fruit 360](https://www.kaggle.com/moltean/fruits).  
 
