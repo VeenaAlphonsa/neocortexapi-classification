@@ -1,4 +1,4 @@
-# Analyse Image Classification (Fruits 360 dataset) 
+# Analyse Image Classification of Fruits 360 dataset
 Team members: Anu Maria Varghese, Tiniya Vinod Puthanpurayil, Veena Alphonsa Jose
 
 # **Project Description**
@@ -57,7 +57,8 @@ The results of the two correlation are printed in the command prompt when execut
 The algorithm for calculating correlation can be found [here](https://github.com/ddobric/neocortexapi/blob/7d05b61b919a82fd7f8028c63970dfbc7d78dd50/source/NeoCortexApi/Utility/MathHelpers.cs#L93)  
 Result example:
 
-![Result18-Output Example](https://user-images.githubusercontent.com/93146556/158153392-b655405b-9491-4273-b479-d82e8d776ca0.jpg)
+<img width="591" alt="final output check 3" src="https://user-images.githubusercontent.com/93146556/160924174-777b5d54-a8d8-428e-8e60-f40d2ddd30a8.PNG">
+
 
 The Images used was collected from [Fruit 360](https://www.kaggle.com/moltean/fruits).  
 
@@ -123,27 +124,24 @@ string PredictLabel(int[] sdrOfInputImage, Dictionary<string, int[]> sdrs)
             }
 ~~~
 
-
+Code description: Select one image path from input folder. The image is binarized into an integer array with "ReadImageData". Using "Compute" method of API, the SDR of the image is calculated and is then compared with the  SDR values of other images which is available in the input folder using the "PredictLabel" function. We can get the similarity of the images using "CalcArraySimilarity".
 
 
 ## RESULTS ACHIEVED
 We have conducted tests to find the best correlation matrix and also prediction code has been generated to predict the input labels.
 #### Case 1: By changing various HTM Parameter to find the best fit correlation Matrix
-<img width="470" alt="Fruits360matrix without prediction" src="https://user-images.githubusercontent.com/93146556/158153042-79ae821a-5cea-4cf2-814d-06449932aeab.png">
+##### Micro Correlation
+![micro](https://user-images.githubusercontent.com/93146556/160921444-6c83ebb6-d2c3-4de8-b1d9-4c14c8b26bc0.jpg)
 
-#### Case 2: By modifying the prediction code to calculate the highest similiarity of the input images
+##### Macro Correlation
+![macro](https://user-images.githubusercontent.com/93146556/160921558-20f908cf-4dae-4c72-9cef-1ae58ebf9c07.jpg)
 
+#### Case 2: By modifying the prediction code to calculate the highest similiarity of the input images!
 <img width="920" alt="similiarity" src="https://user-images.githubusercontent.com/93146556/158353757-3bf932f8-c7ae-4e44-8d40-8c63b38780c8.png">
 
 #### Final Output
+<img width="845" alt="final output check 4" src="https://user-images.githubusercontent.com/93146556/160921333-78ea340d-960e-4974-b3e2-4ac5a626ae56.png">
 
-![final output](https://user-images.githubusercontent.com/93146556/159457975-ee6bdca9-be02-45e0-b313-83c81435a5ba.jpg)
-
-
-
-## WORK IN PROGRESS
-- We are conducting more tests to find how other HTM parameter influence the learning.
-- To define a parameter to represent the overlapping in order to verify the training process.
 
 
 
