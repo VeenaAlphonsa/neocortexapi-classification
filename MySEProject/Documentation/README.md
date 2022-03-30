@@ -129,15 +129,17 @@ Code description: Select one image path from input folder. The image is binarize
 ## RESULTS ACHIEVED
 We have conducted tests to find the best correlation matrix and also prediction code has been generated to predict the input labels.
 #### Case 1: By changing various HTM Parameter to find the best fit correlation Matrix
-<img width="470" alt="Fruits360matrix without prediction" src="https://user-images.githubusercontent.com/93146556/158153042-79ae821a-5cea-4cf2-814d-06449932aeab.png">
+##### Micro Correlation
+![micro](https://user-images.githubusercontent.com/93146556/160921444-6c83ebb6-d2c3-4de8-b1d9-4c14c8b26bc0.jpg)
 
-#### Case 2: By modifying the prediction code to calculate the highest similiarity of the input images
+##### Macro Correlation
+![macro](https://user-images.githubusercontent.com/93146556/160921558-20f908cf-4dae-4c72-9cef-1ae58ebf9c07.jpg)
 
+#### Case 2: By modifying the prediction code to calculate the highest similiarity of the input images!
 <img width="920" alt="similiarity" src="https://user-images.githubusercontent.com/93146556/158353757-3bf932f8-c7ae-4e44-8d40-8c63b38780c8.png">
 
 #### Final Output
-
-![final output](https://user-images.githubusercontent.com/93146556/159457975-ee6bdca9-be02-45e0-b313-83c81435a5ba.jpg)
+<img width="845" alt="final output check 4" src="https://user-images.githubusercontent.com/93146556/160921333-78ea340d-960e-4974-b3e2-4ac5a626ae56.png">
 
 
 
