@@ -1,4 +1,4 @@
-# Analyse Image Classification (Fruits 360 dataset) 
+# Analyse Image Classification of Fruits 360 dataset
 Team members: Anu Maria Varghese, Tiniya Vinod Puthanpurayil, Veena Alphonsa Jose
 
 # **Project Description**
@@ -6,7 +6,7 @@ Team members: Anu Maria Varghese, Tiniya Vinod Puthanpurayil, Veena Alphonsa Jos
 In the previous work at the university an Image Classification solution has been implemented. Our task is to implement a program that uses the existing solution as a library and start a training of learning images. The image dataset we have used in this project is Fruits 360 dataset images. Our task is to change various learning parameters and to find the best fit that shows image classification. Most important learning parameters are: Global/Local Inhibition, Potential Radius, Local Area Density and NumofActiveColumnsPerInArea. We have to demonstrate how these parameters influence the learning. Our code must provide the learning code and prediction code. After learning user should use our code and test the quality of learning. For example, the user after learning enter the image “table”. The prediction code provide a set of predicting results like: “Table – 87%, chair 7%, light - 3%”.
 
 ## METHODS
-#### 1 Prepare the program's directory:
+### 1 Prepare the program's directory:
 First we have prepared images that are required for the training. Images must be copied in the following folder structure along with the application and the config json:  
 
 <img width="342" alt="WorkingDirectory" src="https://user-images.githubusercontent.com/93146556/158149017-3d3b8973-bc09-4490-ae05-297dd9256cb4.png">
@@ -57,7 +57,8 @@ The results of the two correlation are printed in the command prompt when execut
 The algorithm for calculating correlation can be found [here](https://github.com/ddobric/neocortexapi/blob/7d05b61b919a82fd7f8028c63970dfbc7d78dd50/source/NeoCortexApi/Utility/MathHelpers.cs#L93)  
 Result example:
 
-![Result18-Output Example](https://user-images.githubusercontent.com/93146556/158153392-b655405b-9491-4273-b479-d82e8d776ca0.jpg)
+<img width="591" alt="final output check 3" src="https://user-images.githubusercontent.com/93146556/160924174-777b5d54-a8d8-428e-8e60-f40d2ddd30a8.PNG">
+
 
 The Images used was collected from [Fruit 360](https://www.kaggle.com/moltean/fruits).  
 
@@ -129,15 +130,17 @@ Code description: Select one image path from input folder. The image is binarize
 ## RESULTS ACHIEVED
 We have conducted tests to find the best correlation matrix and also prediction code has been generated to predict the input labels.
 #### Case 1: By changing various HTM Parameter to find the best fit correlation Matrix
-<img width="470" alt="Fruits360matrix without prediction" src="https://user-images.githubusercontent.com/93146556/158153042-79ae821a-5cea-4cf2-814d-06449932aeab.png">
+##### Micro Correlation
+![micro](https://user-images.githubusercontent.com/93146556/160921444-6c83ebb6-d2c3-4de8-b1d9-4c14c8b26bc0.jpg)
 
-#### Case 2: By modifying the prediction code to calculate the highest similiarity of the input images
+##### Macro Correlation
+![macro](https://user-images.githubusercontent.com/93146556/160921558-20f908cf-4dae-4c72-9cef-1ae58ebf9c07.jpg)
 
+#### Case 2: By modifying the prediction code to calculate the highest similiarity of the input images!
 <img width="920" alt="similiarity" src="https://user-images.githubusercontent.com/93146556/158353757-3bf932f8-c7ae-4e44-8d40-8c63b38780c8.png">
 
 #### Final Output
-
-![final output](https://user-images.githubusercontent.com/93146556/159457975-ee6bdca9-be02-45e0-b313-83c81435a5ba.jpg)
+<img width="845" alt="final output check 4" src="https://user-images.githubusercontent.com/93146556/160921333-78ea340d-960e-4974-b3e2-4ac5a626ae56.png">
 
 
 
