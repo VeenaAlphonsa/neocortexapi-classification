@@ -79,7 +79,7 @@ namespace ConsoleApp
             ///int[] encodedInputImage = ReadImageData("C:/Software Engineering/Project/neocortexapi-classification/ImageClassification/ImageClassification/bin/Debug/net6.0/InputFolder/Cabbage/CA_6.jpg", width, height);           
             ///Changing hard coded image path to get the folder details from command prompt and then predict the folder.
             Console.WriteLine("Please enter the folder path to predict the label of the image");
-            string encodedInputImage = Console.ReadLine();
+            string ? encodedInputImage = Console.ReadLine();
             int[] encodedInputImages = ReadImageData(encodedInputImage, height, width);
             var temp1 = cortexLayer.Compute(encodedInputImages, true);
             var activeColumns = cortexLayer.GetResult("sp") as int[];
