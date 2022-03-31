@@ -88,7 +88,10 @@ namespace ConsoleApp
             Console.WriteLine($"The label predicted is  { predictedLabel}");
             Console.ReadLine();
             /// <summary>
-            /// To find out the label prediction of the given image
+            /// Select one image path from input folder. The image is binarized into an integer array with "ReadImageData". 
+            /// Using "Compute" method of API, the SDR of the image is calculated and is then 
+            /// compared with the SDR values of other images which is available in the input folder using the "PredictLabel" function.
+            /// We can get the similarity of the images using "CalcArraySimilarity
             /// Created by Veena on 13.03.2022
             /// </summary>
             /// <param name="sdrOfInputImage"></param>
