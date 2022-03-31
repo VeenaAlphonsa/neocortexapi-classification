@@ -57,7 +57,7 @@ namespace ConsoleApp
                         // loop of the images inside the folder
                         for (int j = 0; j < numberOfImages2; j++)
                         {
-                            if (!sdrs.TryGetValue(filePathList2[j], out int[] sdr2)) continue;
+                            if (!sdrs.TryGetValue(filePathList2[j], out int[]? sdr2)) continue;
                             string fileNameofFirstImage = Path.GetFileNameWithoutExtension(filePathList[i]);
                             string fileNameOfSecondImage = Path.GetFileNameWithoutExtension(filePathList2[j]);
                             string temp = $"{classLabel + fileNameofFirstImage}__{classLabel2 + fileNameOfSecondImage}";
@@ -102,7 +102,7 @@ namespace ConsoleApp
                 //Dictionary<string, List<string>> inputsPath = new Dictionary<string, List<string>>();
                 string label = "Could not able to predict the label";
                 double similarityWithEachSDR = 0;
-                double similarityWithPreviousSDR = 0;
+                //double similarityWithPreviousSDR = 0;
                 double temp1 = 0;
                 foreach (KeyValuePair<string, List<string>> secondEntry in inputsPath)
                 {
@@ -114,7 +114,7 @@ namespace ConsoleApp
                     var numberOfImages2 = filePathList2.Count;
                     for (int j = 0; j < numberOfImages2; j++) // loop of each image in each category of inputs
                     {
-                        if (!sdrs.TryGetValue(filePathList2[j], out int[] sdr2)) continue;
+                        if (!sdrs.TryGetValue(filePathList2[j], out int[]? sdr2)) continue;
 
                         //calculating the similarity between SDR of Input Images with the SDR of the current iterated image (Learning Dataset)
                         similarityWithEachSDR = MathHelpers.CalcArraySimilarity(sdrOfInputImage, sdr2);
@@ -173,7 +173,7 @@ namespace ConsoleApp
                     int[] inputVector = ReadImageData(filePath, height, width);
                     binaries.Add(filePath, inputVector);
 
-                    // Write binarized data to a file
+                    // Write binarized data to a file                   
                     var baseDir = Path.GetDirectoryName(filePath);
                     var fileNameWithoutExt = Path.GetFileNameWithoutExtension(filePath);
                     var ext = "txt";
